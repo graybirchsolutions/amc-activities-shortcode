@@ -1,0 +1,131 @@
+<?php namespace AMCActdb\FrontEnd;
+
+/**
+ * Class to render an XML list of AMC trips as HTML
+ *
+ * @link       https://graybirch.solutions
+ * @since      1.0.0
+ *
+ * @package    AMC_actdb_shortcode
+ * @subpackage AMC_actdb_shortcode/public
+ * @author     Martin Jensen <marty@graybirch.solutions>
+ */
+
+class AMCActivityList
+{
+
+  /**
+   * The ID of this plugin.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      SimpleXMLElement $amc_activities - A list of activities in XML format.
+   */
+  private $amc_activities;
+
+  /**
+   * The ID of this plugin.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $html_string - HTML formatted version of the activities list.
+   */
+  private $html_string;
+
+
+  public function __construct( $string )
+  {
+      $this->amc_activities = new \SimpleXMLElement( $string );
+      $this->html_string = '';
+  }
+
+  public function render_list ( $display, $limit )
+  {
+
+    if ( $this->amc_activities->getName() == 'errors' ) {
+        $this->html_string = <<<'EOD'
+<div class="amc-events-container">
+  <div class="amc-event-wrap">
+    <div class="amc-event-title">Sorry!</div>
+    <div class="amc-event-description">
+      No upcoming events are listed in the AMC Activities Calendar.
+    </div>
+  </div>
+</div>
+EOD;
+        return $this->html_string;
+    }
+
+    $i = 1;
+    foreach ( $this->amc_activities->trip as $event ) {
+//      $this->html_string .= "<p>" . (string)$amctrip->trip_title . "</p>\n";
+
+      if ( $display == 'short' ) {
+        $this->render_event_short ( $event );
+      } elseif ( $display == 'long') {
+        $this->render_event_short ( $event );
+      } else {
+        $this->html_string .= "Invalid format: $display\n";
+        return $this->html_string;
+      }
+
+      if ( $i++ == (int)$limit ) break;
+    }
+
+    return $this->html_string;
+  }
+
+  private function render_event_short ( $event )
+  {
+      $event_date = strtotime( $event->trip_start_date );
+
+      // Wrap the event
+      $this->html_string .= "<div class=\"amc-events-container amc-event-short\">\n";
+      $this->html_string .= "  <div class=\"amc-event-wrap amc-event-short\">\n";
+
+      // Render the event
+
+      // Render the event title wrapped in a link back to the event on the AMC website
+      $this->html_string .= "<div class=\"amc-event-title\">" .
+          "<h3><a href=\"https://activities.outdoors.org/search/index.cfm/action/details/id/" .
+          (string)$event->trip_id . "\">" .
+          (string)$event->trip_title . "</a></h3></div>\n";
+
+      // Render date. If time 0000 (midnight) then ignore time else display time
+      $this->html_string .= "<div class=\"amc-event-date\">" . date("D M j Y", $event_date);
+      if ( date("Hi", $event_date) != "0000" ) {
+        $this->html_string .= date(', \a\t g:i a', $event_date);
+      }
+      $this->html_string .= "</div>\n";
+
+      // Render the event type and level
+
+      $i = 0;
+      foreach ( $event->activities->activity as $type ) {
+        $this->html_string .= "<div class=\"amc-event-type\">" . $type . " ";
+        if ($i++ == 0 && $event->tripDifficulty != '') {
+            $this->html_string .= "<span class=\"amc-event-level\">(Level: " . $event->tripDifficulty . ")</span>";
+        }
+        $this->html_string .= "</div>\n";
+      }
+
+
+      // Render the leader information. Include email if present.
+      $this->html_string .= "<div class=\"amc-event-leader\">Leader: " . (string)$event->leader1;
+      if ( (string)$event->leader1_email != '' ) {
+        $this->html_string .= " <<a href=\"mailto:" . (string)$event->leader1_email . "\">" .
+            (string)$event->leader1_email . "</a>>";
+      }
+      $this->html_string .= "</div>\n";
+
+      // Close the wrap
+      $this->html_string .= "  </div>\n</div>\n</br>\n";
+      return;
+  }
+
+  private function render_event_long ( $event )
+  {
+
+  }
+
+}
