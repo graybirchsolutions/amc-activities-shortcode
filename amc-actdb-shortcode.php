@@ -14,8 +14,8 @@
  *
  * @wordpress-plugin
  * Plugin Name:       AMC Activities Shortcode
- * Plugin URI:        https://graybirch.solutions/downloads/amc-actdb-shortcode/
- * Description:       Include data from the AMC Acitivities Database via shortcode. Data is retrieved as XML using a simple HTTP query. Activities are re-formatted as HTTP blocks and displayed in the page or post as events. Usage: [amc_actdb chapter=id [committee=id] [activity=id]]
+ * Plugin URI:        https://bitbucket.org/graybirch/amc-actdb-shortcode
+ * Description:       Include data from the AMC Acitivities Database via shortcode. Data is retrieved as XML using a simple HTTP query. Activities are re-formatted as HTTP blocks and displayed in the page or post as events. Usage: [amc_actdb chapter=id committee=id activity=id display=[short|long] limit=n]
  * Version:           1.0.0
  * Author:            gray birch solutions
  * Author URI:        https://graybirch.solutions/

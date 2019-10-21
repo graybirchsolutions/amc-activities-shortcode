@@ -81,8 +81,8 @@ class AMCActdbPublic
           $amc_url = $amc_url . '&activity=' . esc_attr( $activity );
         }
 
-        $output = "<p>" . $amc_url . "</p>\n";
-        // $output = $output . (string)file_get_contents( $amc_url );
+        $output = "";
+        // $output .= "<p>" . $amc_url . "</p>\n";
 
         $xmlstring = file_get_contents( $amc_url );
 
@@ -91,6 +91,30 @@ class AMCActdbPublic
 
         return $output;
 
+      }
+
+      public function enqueueAMCActdbScript()
+      {
+        $styleSrc = AMC_ACTDB_DIR_URL . "assets/css/amcactdb-public.css";
+        wp_enqueue_style(
+            'amcactdb-styles',
+            $styleSrc,
+            array(),
+            $this->version,
+            'all'
+        );
+
+        // Add Font Awesome kit
+        // <script src="https://kit.fontawesome.com/db96351575.js" crossorigin="anonymous"></script>
+
+        $styleSrc = AMC_ACTDB_DIR_URL . "assets/libs/font-awesome/css/all.min.css";
+        wp_enqueue_style(
+            'font-awesome',
+            $styleSrc,
+            array(),
+            $this->version,
+            'all'
+        );
       }
 
 }

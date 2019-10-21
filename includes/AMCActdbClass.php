@@ -145,6 +145,8 @@ class AMCActdbClass
 
         $this->loader->add_action('init', $plugin_public, 'register_activities_render_functions');
 
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueueAMCActdbScript', 100);
+
     }
 
     /**

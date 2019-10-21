@@ -42,6 +42,9 @@ class AMCActivityList
   public function render_list ( $display, $limit )
   {
 
+    // Wrap the event list
+    $this->html_string .= "<div class=\"amc-events-container\">\n";
+
     if ( $this->amc_activities->getName() == 'errors' ) {
         $this->html_string = <<<'EOD'
 <div class="amc-events-container">
@@ -53,6 +56,8 @@ class AMCActivityList
   </div>
 </div>
 EOD;
+        // Close the event list wrap
+        $this->html_string .= "</div>\n";
         return $this->html_string;
     }
 
@@ -72,6 +77,9 @@ EOD;
       if ( $i++ == (int)$limit ) break;
     }
 
+    // Close the event list wrap
+    $this->html_string .= "</div>\n";
+
     return $this->html_string;
   }
 
@@ -80,52 +88,95 @@ EOD;
       $event_date = strtotime( $event->trip_start_date );
 
       // Wrap the event
-      $this->html_string .= "<div class=\"amc-events-container amc-event-short\">\n";
       $this->html_string .= "  <div class=\"amc-event-wrap amc-event-short\">\n";
 
       // Render the event
 
+      // Render date block
+      $this->html_string .= $this->render_date_block ( $event_date );
+
+      // Wrap Event Description block
+      $this->html_string .= "<div class=\"amc-event-desc-block\">\n";
+
       // Render the event title wrapped in a link back to the event on the AMC website
-      $this->html_string .= "<div class=\"amc-event-title\">" .
-          "<h3><a href=\"https://activities.outdoors.org/search/index.cfm/action/details/id/" .
+      $this->html_string .= "<span class=\"amc-event-title\">" .
+          "<a href=\"https://activities.outdoors.org/search/index.cfm/action/details/id/" .
           (string)$event->trip_id . "\">" .
-          (string)$event->trip_title . "</a></h3></div>\n";
+          (string)$event->trip_title . "</a></span>\n";
+
+      // Wrap description info
+      $this->html_string .= "<span class=\"amc-event-desc-info\">";
 
       // Render date. If time 0000 (midnight) then ignore time else display time
-      $this->html_string .= "<div class=\"amc-event-date\">" . date("D M j Y", $event_date);
+      $this->html_string .= "<span class=\"amc-event-date\">" . date("D M j Y", $event_date);
       if ( date("Hi", $event_date) != "0000" ) {
         $this->html_string .= date(', \a\t g:i a', $event_date);
       }
-      $this->html_string .= "</div>\n";
+      $this->html_string .= "</span>\n";
 
       // Render the event type and level
 
       $i = 0;
       foreach ( $event->activities->activity as $type ) {
-        $this->html_string .= "<div class=\"amc-event-type\">" . $type . " ";
+        $this->html_string .= "<span class=\"amc-event-type\"><span class=\"key\">Activity</span>: " . $type . " ";
         if ($i++ == 0 && $event->tripDifficulty != '') {
-            $this->html_string .= "<span class=\"amc-event-level\">(Level: " . $event->tripDifficulty . ")</span>";
+            $this->html_string .= "<span class=\"amc-event-level\">(<span class=\"key\">Level</span>: " . $event->tripDifficulty . ")</span>";
         }
-        $this->html_string .= "</div>\n";
+        $this->html_string .= "</span>\n";
       }
 
 
       // Render the leader information. Include email if present.
-      $this->html_string .= "<div class=\"amc-event-leader\">Leader: " . (string)$event->leader1;
+      $this->html_string .= "<span class=\"amc-event-leader\"><span class=\"key\">Leader</span>: " . (string)$event->leader1;
       if ( (string)$event->leader1_email != '' ) {
         $this->html_string .= " <<a href=\"mailto:" . (string)$event->leader1_email . "\">" .
             (string)$event->leader1_email . "</a>>";
       }
-      $this->html_string .= "</div>\n";
+      $this->html_string .= "</span>\n";
+
+      // Close description info wrap
+      $this->html_string .= "</span>\n";
 
       // Close the wrap
-      $this->html_string .= "  </div>\n</div>\n</br>\n";
+      $this->html_string .= "</div>\n";
+      $this->html_string .= "</div>\n";
       return;
   }
 
   private function render_event_long ( $event )
   {
 
+  }
+
+  /**
+   * Function to render the date block from the event date
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      Timestamp $evdate - Unix Timestamp with the event date.
+   *
+   */
+
+  private function render_date_block ( $evdate ) {
+
+      // Open date block wrap
+      $dbstring = "<div class=\"amc-date-block\">\n";
+
+      // Open start date block
+      $dbstring .= "  <span class=\"amc-start-date\">\n";
+
+      // Render the date
+      $dbstring .= "    <span class=\"date\">" . date("d", $evdate) . "</span>\n";
+      $dbstring .= "    <span class=\"month\">" . date("M", $evdate) . "</span>\n";
+      $dbstring .= "    <span class=\"year\">" . date("Y", $evdate) . "</span>\n";
+
+      // Close start date
+      $dbstring .= "  </span>\n";
+
+      // Close date block
+      $dbstring .= "</div>\n";
+
+      return $dbstring;
   }
 
 }
