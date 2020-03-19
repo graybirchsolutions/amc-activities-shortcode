@@ -13,11 +13,9 @@
 }
 
  .amc-events-container a:link {
-   color: #2E2928;
  }
 
  .amc-events-container a:hover {
-   color: #7B5C48;
  }
 
 
@@ -38,7 +36,6 @@
 
 .amc-date-block {
   background-color:transparent !important;
-  color:#5B4439;
   font-size:30px;
   padding:0px 8px 2px 13px;
   font-weight:bold;
@@ -73,7 +70,6 @@
 }
 
 .amc-event-desc-block {
-  color: #2E2928;
   margin-left:5px;
   padding:3px 15px 0 60px;
   margin-bottom:0px; top: 0;
@@ -84,33 +80,52 @@
   display: block;
 }
 
-.amc-event-desc-info span {
+.amc-event-desc {
+  line-height: 1.2em;
+}
+
+.amc-event-desc span {
   display: inline-block;
 }
 
-.amc-event-desc-info .key {
+.amc-event-desc .key {
   font-weight: bold;
 }
 
 .amc-event-title {
-  color: #5B4439;
-  line-height: 120%;
-  padding-bottom: 3px;
+  line-height: 1em;
+  padding-bottom: 0.3em;
   text-transform: uppercase;
   font-size: 22px;
+}
+
+.amc-status-canceled {
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.amc-status-open {
+  color: green;
+  font-weight: bold;
+}
+
+.amc-status-waitlist {
+  color: #c3a606;
+  font-weight: bold;
 }
 
 .amc-event-date,
 .amc-event-type,
 .amc-event-leader,
-.amc-event-location {
+.amc-event-location,
+.amc-event-status {
   font-size: 13px;
   padding-right: 10px;
 }
 
 .amc-event-date {
   font-weight: bold;
-  color: #7A8472;
 }
 
 
@@ -139,5 +154,12 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f5a0";
+  padding-right: 5px;
+}
+
+.amc-event-status::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f05a";
   padding-right: 5px;
 }

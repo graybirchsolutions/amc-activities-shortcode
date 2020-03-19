@@ -53,7 +53,7 @@ class AMCActivityList
       <div class="amc-event-title">Sorry!</div>
       <div class="amc-event-description">
         No upcoming events are listed in the AMC Activities Calendar. Please
-        check back frequently as we're often adding new trips and events to
+        check back frequently as we are often adding new trips and events to
         the calendar.
       </div>
     </div>
@@ -90,6 +90,7 @@ EOD;
   private function render_event_short ( $event )
   {
       $event_date = strtotime( $event->trip_start_date );
+      $status_class = '';
 
       // Open event wrap with .amc-event-wrap
       $this->html_string .= "  <div class=\"amc-event-wrap amc-event-short\">\n";
@@ -109,7 +110,10 @@ EOD;
           (string)$event->trip_title . "</a></span>\n";
 
       // Wrap description info
-      $this->html_string .= "<span class=\"amc-event-desc-info\">";
+      $this->html_string .= "<div class=\"amc-event-desc\">";
+
+      // Wrap lead line - Date and Status
+      $this->html_string .= "<div class=\"amc-event-desc-lead\">";
 
       // Render date. If time 0000 (midnight) then ignore time else display time
       $this->html_string .= "<span class=\"amc-event-date\">" . date("D M j Y", $event_date);
@@ -117,6 +121,27 @@ EOD;
         $this->html_string .= date(', \a\t g:i a', $event_date);
       }
       $this->html_string .= "</span>\n";
+
+      // Render event status
+      $this->html_string .= "<span class=\"amc-event-status\"><span class=\"key\">Status</span>: ";
+      switch ($event->status) {
+          case "Open":
+              $status_class = "amc-status-open";
+              break;
+          case "Canceled":
+              $status_class = "amc-status-canceled";
+              break;
+          case "Wait Listed":
+              $status_class = "amc-status-waitlist";
+              break;
+      }
+      $this->html_string .= "<span class=\"" . $status_class . "\">" . $event->status . "</span>";
+      
+      // Close lead line (.amc-event-desc-lead)
+      $this->html_string .= "</div>\n";
+
+      // Wrap info line - Activity, level and leader
+      $this->html_string .= "<div class=\"amc-event-desc-info\">";
 
       // Render the event type and event level (if present)
 
@@ -138,11 +163,17 @@ EOD;
       }
       $this->html_string .= "</span>\n";
 
+      // Close info line (.amc-event-desc-info)
+      $this->html_string .= "</div>\n";
+
       // Render the location if present
       if ( $event->trip_location != '') {
         $this->html_string .= "<div class=\"amc-event-location\"><span class=\"key\">Location</span>: " .
             (string)$event->trip_location . "</div>\n";
       }
+
+      // Close description info (.amc-event-desc-info)
+      $this->html_string .= "</div>\n";
 
       // Close description wrap (.amc-event-desc-block)
       $this->html_string .= "</div>\n";
