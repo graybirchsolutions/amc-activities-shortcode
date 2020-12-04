@@ -1,4 +1,4 @@
-<?php namespace AMCActdb\FrontEnd;
+<?php
 
 /**
  * The public-facing functionality of the plugin.
@@ -13,6 +13,10 @@
  * @subpackage AMC_actdb_shortcode/public
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
+
+namespace AMCActdb\FrontEnd;
+
+use AMCActdb\api\v1\Boot;
 
 class AMCActdbPublic
 {
@@ -54,47 +58,56 @@ class AMCActdbPublic
         add_shortcode('amc_actdb', array($this, 'render_activities_shortcode'));
     }
 
-    public function render_activities_shortcode( $atts )
+    public function registerAPIRoutes()
     {
-        // normalize attribute keys, lowercase
-        $atts = array_change_key_case( (array)$atts, CASE_LOWER );
+        $activities_route = new \AMCActdb\api\v1\routes\Activities();
+        $plugin_api = new \AMCActdb\api\v1\Boot(AMC_API_ROOT);
 
-        extract( shortcode_atts(
+        $plugin_api->addRoute($activities_route);
+        $plugin_api->registerAllRoutes();
+    }
+
+    public function get_activities($chapter, $committee, $activity)
+    {
+        $amc_url = AMC_ACTDB_BASE_URL . '?' . 'chapter=' . esc_attr($chapter);
+
+        if ($committee != '') {
+            $amc_url = $amc_url . '&committee=' . esc_attr($committee);
+        }
+
+        if ($activity != '') {
+            $amc_url = $amc_url . '&activity=' . esc_attr($activity);
+        }
+
+        $xmlstring = file_get_contents($amc_url);
+
+        return $xmlstring;
+    }
+
+    public function render_activities_shortcode($atts)
+    {
+            // normalize attribute keys, lowercase
+            $atts = array_change_key_case((array)$atts, CASE_LOWER);
+
+            extract(shortcode_atts(
             array(
-              'chapter'		 => '2',
-              'committee'	 => '',
-              'activity'	 => '',
-              'display'    => 'short',
-              'limit'      => '0'
+                'chapter'         => '2',
+                'committee'     => '',
+                'activity'     => '',
+                'display'    => 'short',
+                'limit'      => '0'
             ),
             $atts,
             'amc_actdb'
-          ) );
+        ));
 
-        $amc_url = AMC_ACTDB_BASE_URL . '?' . 'chapter=' . esc_attr( $chapter );
+        $activities = new AMCActivityList($this->get_activities($chapter, $committee, $activity));
 
-        if ( $committee != '' ) {
-          $amc_url = $amc_url . '&committee=' . esc_attr( $committee );
-        }
+        return $activities->render_list(esc_attr($display), esc_attr($limit));
+    }
 
-        if ( $activity != '' ) {
-          $amc_url = $amc_url . '&activity=' . esc_attr( $activity );
-        }
-
-        $output = "";
-        // $output .= "<p>" . $amc_url . "</p>\n";
-
-        $xmlstring = file_get_contents( $amc_url );
-
-        $activities = new AMCActivityList ( $xmlstring );
-        $output .= $activities->render_list( esc_attr( $display ), esc_attr( $limit ));
-
-        return $output;
-
-      }
-
-      public function enqueueAMCActdbScript()
-      {
+    public function enqueueAMCActdbScript()
+    {
         $styleSrc = AMC_ACTDB_DIR_URL . "assets/css/amcactdb-public.css";
         wp_enqueue_style(
             'amcactdb-styles',
@@ -115,6 +128,5 @@ class AMCActdbPublic
             $this->version,
             'all'
         );
-      }
-
+    }
 }

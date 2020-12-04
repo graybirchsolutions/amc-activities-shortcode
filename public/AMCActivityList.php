@@ -1,4 +1,4 @@
-<?php namespace AMCActdb\FrontEnd;
+<?php
 
 /**
  * Class to render an XML list of AMC trips as HTML
@@ -10,6 +10,10 @@
  * @subpackage AMC_actdb_shortcode/public
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
+
+namespace AMCActdb\FrontEnd;
+
+use SimpleXMLElement;
 
 class AMCActivityList
 {
@@ -35,7 +39,7 @@ class AMCActivityList
 
   public function __construct( $string )
   {
-      $this->amc_activities = new \SimpleXMLElement( $string );
+      $this->amc_activities = new SimpleXMLElement( $string );
       $this->html_string = '';
   }
 
