@@ -103,7 +103,9 @@ class AMCActdbPublic
 
         $activities = new AMCActivityList($this->get_activities($chapter, $committee, $activity));
 
-        return $activities->render_list(esc_attr($display), esc_attr($limit));
+        // 1.1.0 Shortcode now renders a placeholder in the DOM that will be filled in by Javascript in the browser
+
+        return $activities->render_placeholder(esc_attr($chapter), esc_attr($committee), esc_attr($activity), esc_attr($limit), esc_attr($display));
     }
 
     public function enqueueAMCActdbScript()
@@ -120,13 +122,23 @@ class AMCActdbPublic
         // Add Font Awesome kit
         // <script src="https://kit.fontawesome.com/db96351575.js" crossorigin="anonymous"></script>
 
-        $styleSrc = AMC_ACTDB_DIR_URL . "assets/libs/font-awesome/css/all.min.css";
+        $styleSrc = AMC_ACTDB_DIR_URL . "assets/vendor/font-awesome/css/all.min.css";
         wp_enqueue_style(
-            'font-awesome',
+            'amc-actdb-font-awesome',
             $styleSrc,
             array(),
             $this->version,
             'all'
         );
+
+        $scriptSrc = AMC_ACTDB_DIR_URL . "assets/js/amcactdbRenderEvents.js";
+        wp_enqueue_script(
+            'amc-actdb-render-events',
+            $scriptSrc,
+            array(),
+            $this->version,
+            true
+        );
     }
+
 }

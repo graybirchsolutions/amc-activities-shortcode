@@ -16,7 +16,7 @@
  * Plugin Name:       AMC Activities Shortcode
  * Plugin URI:        https://bitbucket.org/graybirch/amc-actdb-shortcode
  * Description:       Display events from the AMC Activities Database via shortcode. Data is retrieved from the Activities Database XML API via a simple HTTP query. Activities are re-formatted as HTML blocks and displayed in the page or post as events. <strong>Usage: [amc_actdb chapter=id committee=id activity=id display=[short|long] limit=n]</strong>. Chapter is the only required parameter, all other parameters are optional. Display defaults to short. Limit defaults to 10.
- * Version:           1.1.0
+ * Version:           2.0.0
  * Author:            gray birch solutions
  * Author URI:        https://graybirch.solutions/
  * License:           GPL-2.0+
@@ -31,8 +31,8 @@ if (!defined('WPINC')) {
 define('AMC_ACTDB_DIR_URL', plugin_dir_url(__FILE__));
 define('AMC_ACTDB_DIR_PATH', plugin_dir_path(__FILE__));
 define('AMC_ACTDB_PUBLIC_DIR_URL', AMC_ACTDB_DIR_URL . 'public/');
-define('AMC_ACTDB_VERSION', '1.1.0');
-define('AMC_ACTDB_ASSET_VERSION', '1.1.0');
+define('AMC_ACTDB_VERSION', '2.0.0');
+define('AMC_ACTDB_ASSET_VERSION', '2.0.0');
 
 define('AMC_ACTDB_BASE_URL', 'https://activities.outdoors.org/xml/index.cfm');
 define('AMC_ACTDB_BASE_EVENT_URL', 'https://activities.outdoors.org/search/index.cfm/action/details/id/');

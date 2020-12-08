@@ -19,7 +19,7 @@ class Response extends \WP_REST_Response
     {
         parent::__construct($data, $status, $headers);
         if (empty($data)) {
-            $this->set_status(404);
+            $this->set_status(204);
         }
     }
 }

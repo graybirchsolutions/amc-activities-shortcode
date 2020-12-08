@@ -37,14 +37,14 @@ class Activities extends PublicReadRoute
                 'type' => 'integer',
                 'description' => 'The AMC Committee Code. Optional. If not supplied, all Chapter activites are returned.',
                 'minimum' => 1,
-                'maximum' => 40
+                'maximum' => 100
             ],
             'activity' => [
                 'required' => false,
                 'type' => 'integer',
                 'description' => 'The AMC Activity Code. Optional. If not supplied, all Committee activites are returned.',
                 'minimum' => 1,
-                'maximum' => 40
+                'maximum' => 100
             ],
             'display' => [
                 'required' => false,
@@ -106,8 +106,11 @@ class Activities extends PublicReadRoute
                 $error->add('AMCError', 'error Code returned = ' . (string)$amcerr->errorCode);
                 $error->add('AMCError', 'error Message returned = ' . (string)$amcerr->message);
                 $error->add('AMCError', 'error Field returned = ' . (string)$amcerr->field);
+                if ((string)$amcerr->errorCode == '0') {
+                    return new Response($error, 204, []);    // Query valid, no data returned
+                }
             }
-            return new Response($error, 404, []);
+            return new Response($error, 400, []);    // Query returned an error
         }
 
         $items = $this->prepareItemsForResponse($activityList, (int)$request->get_param('limit'));
