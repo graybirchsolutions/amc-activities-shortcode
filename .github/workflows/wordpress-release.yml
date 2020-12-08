@@ -1,0 +1,30 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Generate and Upload Installable Plugin
+
+on:
+  release:
+    types: [published]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Build Project
+        run: |
+          mkdir build
+      - name: Create Artifact
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -X -r build/amc-actdb-shortcode.zip . -x *.git* composer.* .* "*/\.*" build**
+      - name: Add Artifact to Release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: build/amc-actdb-shortcode.zip application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
