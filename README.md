@@ -2,7 +2,7 @@
 
 [AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-actdb-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
 
-The AMC provides a simple API that returns a list of activities in XML format for the use of its member chapters. This plugin will format a query to the API and parse the returned list into valid HTML structure that is returned through the shortcode handler for display on the WordPress front end.
+The AMC provides a simple API that returns a list of activities in XML format for the use of its member chapters. This plugin will format a query to that API and parse the returned list into valid HTML structure that is returned through the shortcode handler for display on the WordPress front end.
 
 ## Features
 
@@ -10,7 +10,7 @@ The plugin creates a WordPress shortcode that can be used in any page, post or s
 
     [amc_actdb chapter=id committee=id activity=id display=[short|long] limit=n]
 
-The chapter ID is mandatory. All other attributes are optional, but it is recommended to us other parameters (committee, activity or limit) to restrict the list as [amc_actdb chapter=xx] by itself will return **all** future activities from the database.
+The chapter ID is mandatory. All other attributes are optional, but it is recommended to use other parameters (committee, activity or limit) to restrict the list as [amc_actdb chapter=xx] by itself will return **all** future activities from the database.
 
 The ***display*** attribute controls whether the plugin renders the events in short
 or long format. 
@@ -21,7 +21,7 @@ or long format.
 
 The ***limit*** attribute controls how many events are displayed. The events are returned in chronological order so using limit=5 would restrict the display to the next 5 upcoming events.
 
-Functionality to retrieve prior events is not available in the API.
+Functionality to retrieve prior events is not available in the AMC API and cannot be added through this plugin.
 
 ## Requirements
 
