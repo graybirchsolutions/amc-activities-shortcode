@@ -1,6 +1,6 @@
 # AMC Activities Shortcode WordPress Plugin
 
-[AMC Activities Shortcode](https://bitbucket.org/graybirch/amc-actdb-shortcode) is a WordPress plugin to pull and format selected trips/activities from the [AMC Activities Database](https://activities.outdoors.org/).
+[AMC Activities Shortcode](https://bitbucket.org/graybirch/amc-actdb-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
 
 The AMC provides a simple API that returns a list of activities in XML format for the use of its member chapters. This plugin will format a query to the API and parse the returned list into valid HTML structure that is returned through the shortcode handler for display on the WordPress front end.
 
