@@ -1,6 +1,6 @@
 # AMC Activities Shortcode WordPress Plugin
 
-[AMC Activities Shortcode](https://bitbucket.org/graybirch/amc-actdb-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
+[AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-actdb-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
 
 The AMC provides a simple API that returns a list of activities in XML format for the use of its member chapters. This plugin will format a query to the API and parse the returned list into valid HTML structure that is returned through the shortcode handler for display on the WordPress front end.
 
@@ -30,7 +30,7 @@ Functionality to retrieve prior events is not available in the API.
 
 ## Installation
 
-1. Download the zip archive of the plugin from the [Bitbucket GIT repository](https://bitbucket.org/graybirch/amc-actdb-shortcode) to your computer or web server.
+1. Download the zip archive of the plugin from the [GitHub GIT repository](https://github.com/graybirchsolutions/amc-actdb-shortcode/releases/latest) to your computer or web server.
 2. Upload or extract the `amc-actdb-shortcode` folder to your site’s `/wp-content/plugins/` directory. You can also use the *Add new* option found in the *Plugins* menu in WordPress.
 3. Activate the plugin from the *Plugins* menu in WordPress.
 
@@ -39,7 +39,7 @@ Functionality to retrieve prior events is not available in the API.
 1. Login to your web server with your site's admin userid and navigate to your site's '/wp-content/plugins/' directory.
 2. Use **git** to pull the archive from the repository using the command 
     ```
-    git clone https://bitbucket.org/graybirch/amc-actdb-shortcode.git
+    git clone https://github.com/graybirchsolutions/amc-actdb-shortcode.git
     ```
 3. Logon to your WordPress installation and activate the plugin from the *Plugins* page.
 
