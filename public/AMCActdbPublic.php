@@ -55,7 +55,7 @@ class AMCActdbPublic
     public function register_activities_render_functions()
     {
         // register the shortcode
-        add_shortcode('amc_actdb', array($this, 'render_activities_shortcode'));
+        add_shortcode('amc_activities', array($this, 'render_activities_shortcode'));
     }
 
     public function registerAPIRoutes()

@@ -1,6 +1,6 @@
 # AMC Activities Shortcode WordPress Plugin
 
-[AMC Activities Shortcode](https://bitbucket.org/graybirch/amc-actdb-shortcode) is a WordPress plugin to pull selected trips/activities from the [AMC Activities Database](https://activities.outdoors.org/) and display them in a calendar/agenda format on any WordPress-based website.
+[AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-actdb-shortcode) is a WordPress plugin to pull selected trips/activities from the [AMC Activities Database](https://activities.outdoors.org/) and display them in a calendar/agenda format on any WordPress-based website.
 
 ## Features
 
@@ -27,7 +27,7 @@ Functionality to retrieve past events is not available through the AMC's API, so
 
 ## Installation
 
-1. Download the zip archive of the plugin from the [GitHub repository](https://github.com/marty-graybirch/amc-actdb-shortcode) to your computer or web server.
+1. Download the zip archive of the plugin from the [GitHub repository](https://github.com/graybirchsolutions/amc-actdb-shortcode) to your computer or web server.
 2. Upload or extract the `amc-actdb-shortcode` folder to your site’s `/wp-content/plugins/` directory. You can also use the *Add new* option found in the *Plugins* menu in WordPress.
 3. Activate the plugin from the *Plugins* menu in WordPress.
 
@@ -36,7 +36,7 @@ Functionality to retrieve past events is not available through the AMC's API, so
 1. Login to your web server with your site's admin userid and navigate to your site's '/wp-content/plugins/' directory.
 2. Use **git** to pull the archive from the repository using the command 
     ```
-    git clone https://bitbucket.org/graybirch/amc-actdb-shortcode.git
+    git clone https://github.com/graybirchsolutions/amc-actdb-shortcode.git
     ```
 3. Logon to your WordPress installation and activate the plugin from the *Plugins* page.
 
