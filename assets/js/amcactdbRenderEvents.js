@@ -364,7 +364,6 @@ function renderAMCEvents () {
     var eventBlocks = document.querySelectorAll('.amc-events-container');
 
     if (eventBlocks.length > 0) {
-        console.log(eventBlocks)
         for (i = 0; i < eventBlocks.length; i++) {
             var eventBlock = eventBlocks[i];
 
@@ -388,12 +387,6 @@ function renderAMCEvents () {
             }
     
             renderBlock(eventBlock, queryURL);
-                // .catch(e => {
-                //     console.log('Unexpected fetch() response');
-                //     console.log(`Response code: ${e.code}`);
-                //     console.log(`Response message: ${e.message}`);
-            
-                // });
         }
     }
 }
@@ -402,7 +395,6 @@ async function renderBlock(eventBlock, queryURL) {
             
     let response = await fetch(queryURL);
 
-    console.log(`response.status = ${response.status}`);
     if (!response.ok || response.status == '204') {
         if (response.status == '204') {
             renderNoEvents(eventBlock);
@@ -422,7 +414,6 @@ async function renderBlock(eventBlock, queryURL) {
     }
     else {
         let activities = await response.json();
-        console.log('We are here');
 
         renderEvents(eventBlock, activities);
     }
