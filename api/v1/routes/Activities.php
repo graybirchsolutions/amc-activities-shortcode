@@ -166,7 +166,8 @@ class Activities extends PublicReadRoute
             'trip_leader' => (string)$event->leader1,
             'trip_leader_email' => (string)$event->leader1_email,
             'trip_difficulty' => (string)$event->tripDifficulty,
-            'trip_location' => (string)$event->trip_location
+            'trip_location' => (string)$event->trip_location,
+            'trip_description' => (string)$event->web_desc
         ];
 
         $activityTypes = [];
@@ -175,6 +176,13 @@ class Activities extends PublicReadRoute
         }
 
         $eventResponse['trip_activities'] = $activityTypes;
+
+        $images = [];
+        foreach ($event->trip_images->image as $image) {
+            $images[] .= $image->url;
+        }
+
+        $eventResponse['trip_images'] = $images;
 
         return $eventResponse;
     }

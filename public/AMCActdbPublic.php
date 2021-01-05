@@ -110,35 +110,38 @@ class AMCActdbPublic
 
     public function enqueueAMCActdbScript()
     {
-        $styleSrc = AMC_ACTDB_DIR_URL . "assets/css/amcactdb-public.css";
-        wp_enqueue_style(
-            'amcactdb-styles',
-            $styleSrc,
-            array(),
-            $this->version,
-            'all'
-        );
+        global $post;
+        if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'amc_activities') ) {
+            $styleSrc = AMC_ACTDB_DIR_URL . "assets/css/amcactdb-public.css";
+            wp_enqueue_style(
+                'amcactdb-styles',
+                $styleSrc,
+                array(),
+                $this->version,
+                'all'
+            );
 
-        // Add Font Awesome kit
-        // <script src="https://kit.fontawesome.com/db96351575.js" crossorigin="anonymous"></script>
+            // Add Font Awesome kit
+            // <script src="https://kit.fontawesome.com/db96351575.js" crossorigin="anonymous"></script>
 
-        $styleSrc = AMC_ACTDB_DIR_URL . "assets/vendor/font-awesome/css/all.min.css";
-        wp_enqueue_style(
-            'amc-actdb-font-awesome',
-            $styleSrc,
-            array(),
-            $this->version,
-            'all'
-        );
+            $styleSrc = AMC_ACTDB_DIR_URL . "assets/vendor/font-awesome/css/all.min.css";
+            wp_enqueue_style(
+                'amc-actdb-font-awesome',
+                $styleSrc,
+                array(),
+                $this->version,
+                'all'
+            );
 
-        $scriptSrc = AMC_ACTDB_DIR_URL . "assets/js/amcactdbRenderEvents.js";
-        wp_enqueue_script(
-            'amc-actdb-render-events',
-            $scriptSrc,
-            array(),
-            $this->version,
-            true
-        );
+            $scriptSrc = AMC_ACTDB_DIR_URL . "assets/js/amcactdbRenderEvents.js";
+            wp_enqueue_script(
+                'amc-actdb-render-events',
+                $scriptSrc,
+                array(),
+                $this->version,
+                true
+            );
+        }
     }
 
 }

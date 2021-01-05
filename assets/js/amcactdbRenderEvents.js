@@ -23,6 +23,11 @@
 
 const AMCACTDB_API_ACTIVITIES_BASE = '/wp-json/AMCActdb/1.0/activities'
 
+var myscript = document.getElementById("amc-actdb-render-events-js");
+var myscripturl = myscript.src;
+
+const AMC_ACTDB_ASSETDIR_URL = myscripturl.slice(0, myscripturl.indexOf('/js/'));
+
 var renderEvent = function (activity) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -31,7 +36,6 @@ var renderEvent = function (activity) {
     var darr = dt[0].split('-');
     var tarr = dt[1].split(':')
     var sDate = new Date(darr[0], darr[1], darr[2], tarr[0], tarr[1]);
-    console.log(sDate);
 
     var min = sDate.getMinutes();
     if (min < 10) {
@@ -49,17 +53,14 @@ var renderEvent = function (activity) {
     var ys = document.createElement("span");
     ys.className = 'year';
     ys.textContent = sDate.getFullYear();
-    console.log(ys)
 
     var ms = document.createElement("span");
     ms.className = 'month';
     ms.textContent = months[sDate.getMonth()];
-    console.log(ms)
 
     var ds = document.createElement("span");
     ds.className = 'date';
     ds.textContent = sDate.getDate();
-    console.log(ds)
 
     var sdb = document.createElement("span");
     sdb.className = 'amc-start-date';
@@ -116,11 +117,24 @@ var renderEvent = function (activity) {
     st.appendChild(escolon);
     st.appendChild(es);
 
-    // Event Description Lead Block - Contains date string and status
+    // Format the event committee
+    var comkey = document.createElement("span");
+    comkey.className = 'key';
+    comkey.textContent = 'Committee'
+
+    var comtxt = document.createTextNode(`: ${activity.trip_committee}`);
+    
+    var comspan = document.createElement("span");
+    comspan.className = 'amc-event-committee';
+    comspan.appendChild(comkey);
+    comspan.appendChild(comtxt);
+
+    // Event Description Lead Block - Contains date string, status and committee
     var edlb = document.createElement("div");
     edlb.className = "amc-event-desc-lead";
     edlb.appendChild(dd);
     edlb.appendChild(st);
+    edlb.appendChild(comspan);
 
     // Event Descripton Info - Contains event type, event leader and event description
     var edi = document.createElement("div");
@@ -193,8 +207,6 @@ var renderEvent = function (activity) {
 
         desc.appendChild(evl);
     }
-
-
     
     // Event Description Block - Contains Title, Event Description and Event Location
     var edb = document.createElement("div");
@@ -202,12 +214,93 @@ var renderEvent = function (activity) {
     edb.appendChild(title);
     edb.appendChild(desc);
 
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.addEventListener('change', function () {
+        // Find the event detail block
+        var evwrap = this.closest('.amc-event-wrap');
+        var evdetails = evwrap.querySelector('.amc-event-details')
+        if (this.checked) {
+            evdetails.style.display = "flex";
+            evdetails.style.visibility = "visible";
+            evdetails.style.opacity = "1";
+        } else {
+            evdetails.style.display = "none";
+            evdetails.style.visibility = "hidden";
+            evdetails.style.opacity = "0";
+        }
+    });
+
+    var slider = document.createElement("span");
+    slider.className = 'amc-slider';
+    slider.className += ' round';
+
+    var tooltip = document.createElement("span");
+    tooltip.className = 'tooltip';
+    tooltip.textContent = "hide/show event description";
+
+    var toggle = document.createElement("label");
+    toggle.className = 'amc-switch';
+    toggle.appendChild(checkbox);
+    toggle.appendChild(slider);
+    toggle.appendChild(tooltip);
+
+
     // Event Wrap - Contains the Date Block and Event Description Block
     var wrap = document.createElement("div");
     wrap.className = 'amc-event-wrap';
     wrap.appendChild(db);
+    wrap.appendChild(toggle);
     wrap.appendChild(edb);
 
+    // Render additional data - The featured image and the full description.
+
+    var details = document.createElement("div");
+    details.className = 'amc-event-details';
+
+    var img = document.createElement("img");
+    if (!activity.trip_images.length == 0) {
+        img.src = `https:${activity.trip_images[0]}`;
+    } else {
+        // Fetch a random seeded image from our own assets
+        img.src = `${AMC_ACTDB_ASSETDIR_URL}/img/AMC_Logo_${Math.floor(Math.random() * 10) + 1}.svg`;
+        img.width = '200';
+        img.height = '200';
+    }
+
+    var imgdiv = document.createElement("div");
+    imgdiv.className = 'amc-event-image';
+    imgdiv.appendChild(img);
+    
+    var fulldiv = document.createElement("div");
+    fulldiv.className = 'amc-event-long-desc';
+
+    var fulltxt = document.createElement("p");
+    fulltxt.className = 'wrap-text';
+    fulltxt.textContent = activity.trip_description;
+    fulldiv.appendChild(fulltxt);
+
+    var evmore = document.createElement("div");
+    evmore.className = 'amc-more-details';
+    var evmoreP = document.createElement("p");
+    var morx1 = document.createTextNode('To find out more or to register for this event please see ');
+    var mora1 = document.createElement("a");
+    mora1.href = activity.trip_url;
+    mora1.textContent = "the event page";
+    var morx2 = document.createTextNode(' on the AMC\'s Activities website at ');
+    var mora2 = document.createElement("a");
+    mora2.href = "https://activities.outdoors.org";
+    mora2.textContent = "activities.outdoors.org";
+    evmore.appendChild(morx1);
+    evmore.appendChild(mora1);
+    evmore.appendChild(morx2);
+    evmore.appendChild(mora2);
+
+    details.appendChild(imgdiv);
+    details.appendChild(fulldiv);
+    details.appendChild(evmore);
+
+    edb.appendChild(details)
 
     return wrap;
 }
@@ -254,25 +347,24 @@ var renderBadQuery = function (eventBlock) {
     eventBlock.appendChild(wrap);
 }
 
-var renderEvents = function (eventBlock, activities, limit, display) {
-    console.log('The Event Block');
-    console.log(eventBlock);
-    console.log('The Activities List');
-    console.log(activities);
+var renderEvents = function (eventBlock, activities) {
+    loader = eventBlock.querySelector(".amc-loader");
+
     for (var i = 0; i < activities.length; i++) {
         var activity = activities[i];
-        console.log(`Trip ID: ${activity.trip_id}`);
         eventBlock.appendChild(renderEvent(activity));
     }
-    console.log('The End');
+
+    loader.remove();
 }
 
-var renderAMCEvents = function () {
+function renderAMCEvents () {
     // First, find all instances of divs with class="amc-events-container"
     
     var eventBlocks = document.querySelectorAll('.amc-events-container');
 
     if (eventBlocks.length > 0) {
+        console.log(eventBlocks)
         for (i = 0; i < eventBlocks.length; i++) {
             var eventBlock = eventBlocks[i];
 
@@ -280,7 +372,6 @@ var renderAMCEvents = function () {
             var committee = eventBlock.dataset.committee;
             var activity = eventBlock.dataset.activity;
             var limit = eventBlock.dataset.limit;
-            var display = eventBlock.dataset.display;
 
             var queryURL = `${AMCACTDB_API_ACTIVITIES_BASE}?chapter=${chapter}`;
 
@@ -296,39 +387,47 @@ var renderAMCEvents = function () {
                 queryURL += '&limit=' + limit;
             }
     
-            fetch(queryURL)
-                .then(response => {
-                    console.log(response);
-                    if (!response.ok || response.status == '204') {
-                        throw {
-                            code: response.status,
-                            messsage: response.statusText
-                        };
-                    }
-                    else {
-                        return response.json();
-                    }
-                })
-                .then(activities => {
-                    renderEvents(eventBlock, activities, limit, display);
-                })
-                .catch(e => {
-                    if (e.code == '204') {
-                        renderNoEvents(eventBlock);
-                    } else if (e.code == '400') {
-                        console.log('Bad request: Error 400 - Likely due to missing chapter in the server request to AMC Activities Database');
-                        console.log('             Make sure the amc-actdb-shortcode has included a valid chapter number.')
-                        renderBadQuery(eventBlock);
-                    } else if (e.code == '404') {
-                        console.log('Error 404 - Page or API Route not found on server.');
-                        renderBadQuery(eventBlock);
-                    } else {
-                        throw e;
-                    }
-                });
+            renderBlock(eventBlock, queryURL);
+                // .catch(e => {
+                //     console.log('Unexpected fetch() response');
+                //     console.log(`Response code: ${e.code}`);
+                //     console.log(`Response message: ${e.message}`);
+            
+                // });
         }
     }
 }
+
+async function renderBlock(eventBlock, queryURL) {
+            
+    let response = await fetch(queryURL);
+
+    console.log(`response.status = ${response.status}`);
+    if (!response.ok || response.status == '204') {
+        if (response.status == '204') {
+            renderNoEvents(eventBlock);
+        } else if (response.status == '400') {
+            console.log('Bad request: Error 400 - Likely due to missing chapter in the server request to AMC Activities Database');
+            console.log('             Make sure the amc-actdb-shortcode has included a valid chapter number.');
+            renderBadQuery(eventBlock);
+        } else if (response.status == '404') {
+            console.log('Error 404 - Page or API Route not found on server.');
+            renderBadQuery(eventBlock);
+        } else {
+            throw {
+                code: response.status,
+                messsage: response.statusText
+            };
+        }
+    }
+    else {
+        let activities = await response.json();
+        console.log('We are here');
+
+        renderEvents(eventBlock, activities);
+    }
+}
+
 
 if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
     renderAMCEvents();

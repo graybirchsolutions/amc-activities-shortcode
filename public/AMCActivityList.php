@@ -60,8 +60,10 @@ class AMCActivityList
         $this->html_string .= "data-committee=\"$committee\" ";       // Committee data attribute
         $this->html_string .= "data-activity=\"$activity\" ";         // Activity data attribute
         $this->html_string .= "data-limit=\"$limit\" ";               // Limit data attribute
-        $this->html_string .= "data-display=\"$display\" ";           // Display data attribute
         $this->html_string .= ">\n";
+
+        // Add loader div
+        $this->html_string .= "    <div class=\"amc-loader\"></div>\n";
 
         // Close wrapping Div
         $this->html_string .= "</div>\n";
