@@ -179,11 +179,16 @@ input:checked + .amc-slider:before {
 }
 
 .amc-event-details {
+  /* Initial state */
   display: none;
-  /* display: flex; */
-  flex-wrap: wrap;
   visibility: hidden;
   opacity: 0;
+  /* Toggle button listener changes styles to to 
+     display: flex;
+     visibility: visible;
+     opacity: 1;
+  */
+  flex-wrap: wrap;
   border-top: 20px;
   margin-top: 20px;
   -webkit-transition: opacity 600ms, visibility 600ms;
