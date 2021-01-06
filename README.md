@@ -1,19 +1,22 @@
 # AMC Activities Shortcode WordPress Plugin
 
+<<<<<<< HEAD
 [AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-actdb-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
 
 The AMC provides a simple API that returns a list of activities in XML format for the use of its member chapters. This plugin will format a query to that API and parse the returned list into valid HTML structure that is returned through the shortcode handler for display on the WordPress front end.
+=======
+[AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-actdb-shortcode) is a WordPress plugin to pull selected trips/activities from the [AMC Activities Database](https://activities.outdoors.org/) and display them in a calendar/agenda format on any WordPress-based website.
+>>>>>>> feature/RestAPI
 
 ## Features
 
 The plugin creates a WordPress shortcode that can be used in any page, post or section that supports shortcodes. The shortcode format is
 
-    [amc_actdb chapter=id committee=id activity=id display=[short|long] limit=n]
+    [amc_actdb chapter=id committee=id activity=id limit=n display=short|long]
 
 The chapter ID is mandatory. All other attributes are optional, but it is recommended to use other parameters (committee, activity or limit) to restrict the list as [amc_actdb chapter=xx] by itself will return **all** future activities from the database.
 
-The ***display*** attribute controls whether the plugin renders the events in short
-or long format. 
+The ***display*** attribute controls whether the plugin renders the events in short or long format. 
 
 - *Short* format displays the event title, date, status, type & level and the trip leader name and email. 
 
@@ -21,7 +24,11 @@ or long format.
 
 The ***limit*** attribute controls how many events are displayed. The events are returned in chronological order so using limit=5 would restrict the display to the next 5 upcoming events.
 
+<<<<<<< HEAD
 Functionality to retrieve prior events is not available in the AMC API and cannot be added through this plugin.
+=======
+Functionality to retrieve past events is not available through the AMC's API, so the plugin cannot display past events.
+>>>>>>> feature/RestAPI
 
 ## Requirements
 
@@ -30,11 +37,15 @@ Functionality to retrieve prior events is not available in the AMC API and canno
 
 ## Installation
 
+<<<<<<< HEAD
 1. Download the zip archive of the plugin from the [GitHub GIT repository](https://github.com/graybirchsolutions/amc-actdb-shortcode/releases/latest) to your computer or web server.
+=======
+1. Download the zip archive of the plugin from the [GitHub repository](https://github.com/graybirchsolutions/amc-actdb-shortcode) to your computer or web server.
+>>>>>>> feature/RestAPI
 2. Upload or extract the `amc-actdb-shortcode` folder to your site’s `/wp-content/plugins/` directory. You can also use the *Add new* option found in the *Plugins* menu in WordPress.
 3. Activate the plugin from the *Plugins* menu in WordPress.
 
-***Alternative Installation***
+***Alternate Installation***
 
 1. Login to your web server with your site's admin userid and navigate to your site's '/wp-content/plugins/' directory.
 2. Use **git** to pull the archive from the repository using the command 
