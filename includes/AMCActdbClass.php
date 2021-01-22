@@ -17,6 +17,7 @@
 namespace AMCActdb;
 
 use AMCActdb\FrontEnd\AMCActdbPublic;
+use AMCActdb\BackEnd\AMCActdbAdmin;
 use AMCActdb\api\v1\Boot;
 
 class AMCActdbClass
@@ -142,6 +143,9 @@ class AMCActdbClass
      */
     private function defineAdminHooks()
     {
+        $plugin_admin = new AMCActdbAdmin($this->get_plugin_name(), $this->get_version());
+
+        $this->loader->add_action('init', $plugin_admin, 'github_updater_init');
     }
 
     /**

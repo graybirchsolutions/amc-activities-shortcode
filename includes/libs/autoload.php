@@ -15,3 +15,5 @@
  * @subpackage AMC_actdb_shortcode/includes
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
+
+ require_once 'GitHubUpdater/updater.php';
