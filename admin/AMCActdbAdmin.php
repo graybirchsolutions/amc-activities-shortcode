@@ -57,7 +57,7 @@ class AMCActdbAdmin
     public function github_updater_init() {
         if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
 
-            define( 'WP_GITHUB_FORCE_UPDATE', true );
+            define( 'WP_GITHUB_FORCE_UPDATE', false );
             $config = array(
                 'slug' => AMC_ACTDB_SLUG,
                 'proper_folder_name' => 'amc-actdb-shortcode',
@@ -67,7 +67,7 @@ class AMCActdbAdmin
                 'zip_url' => 'https://github.com/graybirchsolutions/amc-actdb-shortcode/archive/master.zip',
                 'sslverify' => true,
                 'requires' => '5.1',
-                'tested' => '5.6',
+                'tested' => '5.6.1',
                 'readme' => 'README.md',
                 'access_token' => '',
             );
