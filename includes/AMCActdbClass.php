@@ -87,6 +87,11 @@ class AMCActdbClass
     {
 
         /**
+         * Autoload Composer Dependencies
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'vendor/autoload.php';
+   
+        /**
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
@@ -97,11 +102,6 @@ class AMCActdbClass
          * Include all globally accessible functions.
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActdbGlobal.php';
-
-        /**
-         * Include Libs
-         */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/libs/autoload.php';
 
         /**
          * The modules responsible for defining the API Custom Endpoints.

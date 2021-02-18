@@ -16,4 +16,4 @@
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
 
- require_once 'GitHubUpdater/updater.php';
+ 

@@ -124,7 +124,7 @@ class AMCActdbPublic
             // Add Font Awesome kit
             // <script src="https://kit.fontawesome.com/db96351575.js" crossorigin="anonymous"></script>
 
-            $styleSrc = AMC_ACTDB_DIR_URL . "assets/vendor/font-awesome/css/all.min.css";
+            $styleSrc = AMC_ACTDB_DIR_URL . "vendor/components/font-awesome/css/solid.min.css";
             wp_enqueue_style(
                 'amc-actdb-font-awesome',
                 $styleSrc,

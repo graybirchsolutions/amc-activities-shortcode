@@ -1,0 +1,161 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "259e3a05fba3164a9896fa02f14715a6",
+    "packages": [
+        {
+            "name": "components/font-awesome",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/font-awesome.git",
+                "reference": "6943708effe6d823d40255bcdbe9ee021312c880"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/font-awesome/zipball/6943708effe6d823d40255bcdbe9ee021312c880",
+                "reference": "6943708effe6d823d40255bcdbe9ee021312c880",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "component",
+            "extra": {
+                "component": {
+                    "styles": [
+                        "css/all.css"
+                    ],
+                    "files": [
+                        "css/all.min.css",
+                        "webfonts/*"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "CC-BY-4.0",
+                "MIT",
+                "OFL-1.1"
+            ],
+            "description": "Font Awesome, the iconic SVG, font, and CSS framework.",
+            "support": {
+                "issues": "https://github.com/components/font-awesome/issues",
+                "source": "https://github.com/components/font-awesome/tree/5.15.1"
+            },
+            "time": "2020-10-06T06:45:49+00:00"
+        },
+        {
+            "name": "erusev/parsedown",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "6598f3860c2698fe2f0f1bc98212fc01d0a1893c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/6598f3860c2698fe2f0f1bc98212fc01d0a1893c",
+                "reference": "6598f3860c2698fe2f0f1bc98212fc01d0a1893c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/master"
+            },
+            "time": "2020-08-09T14:12:21+00:00"
+        },
+        {
+            "name": "radishconcepts/wordpress-github-plugin-updater",
+            "version": "dev-graybirch",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/graybirchsolutions/WordPress-GitHub-Plugin-Updater.git",
+                "reference": "5eb840052a9eac052f0256cbe31d464dd644a591"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/graybirchsolutions/WordPress-GitHub-Plugin-Updater/zipball/5eb840052a9eac052f0256cbe31d464dd644a591",
+                "reference": "5eb840052a9eac052f0256cbe31d464dd644a591",
+                "shasum": ""
+            },
+            "require": {
+                "erusev/parsedown": ">=1.7.4"
+            },
+            "type": "library",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Joachim Kudish",
+                    "email": "joey@jkudish.com",
+                    "homepage": "http://jkudish.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Radish Concepts",
+                    "email": "info@radishconcepts.com",
+                    "homepage": "http://www.radishconcepts.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Martin Jensen",
+                    "email": "marty@graybirch.solutions",
+                    "homepage": "https://github.com/graybirchsolutions",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This class is meant to be used with your Github hosted WordPress plugins. The purpose of the class is to allow your WordPress plugin to be updated whenever you push out a new version of your plugin; similarly to the experience users know and love with the WordPress.org plugin repository.",
+            "homepage": "https://github.com/graybirchsolutions/WordPress-GitHub-Plugin-Updater",
+            "support": {
+                "issues": "https://github.com/graybirchsolutions/WordPress-GitHub-Plugin-Updater/issues",
+                "source": "https://github.com/graybirchsolutions/WordPress-GitHub-Plugin-Updater/tree/graybirch"
+            },
+            "time": "2021-02-18T06:47:31+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "radishconcepts/wordpress-github-plugin-updater": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}

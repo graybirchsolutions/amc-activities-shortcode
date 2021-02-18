@@ -1,0 +1,30 @@
+{
+    "name": "graybirchsolutions/amc-actdb-shortcode",
+    "description": "A WordPress plugin to display upcoming events from the Appalachian Mountain Club (AMC) Activities Database.",
+    "authors": [
+      {
+        "name": "Martin Jensen",
+        "email": "marty@graybirch.solutions",
+        "homepage": "https://github.com/graybirchsolutions",
+        "role": "Developer"
+      }
+    ],
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://github.com/graybirchsolutions/amc-actdb-shortcode",
+    "readme": "https://github.com/graybirchsolutions/amc-actdb-shortcode/blob/master/README.md",
+    "support": {
+      "issues": "https://github.com/graybirchsolutions/amc-actdb-shortcode/issues"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/graybirchsolutions/WordPress-GitHub-Plugin-Updater"
+        }
+    ],
+    "require": {
+      "radishconcepts/wordpress-github-plugin-updater": "dev-graybirch",
+      "components/font-awesome": ">5.15"
+    },
+    "minimum-stability": "dev"
+  }
