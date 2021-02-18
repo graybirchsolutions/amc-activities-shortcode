@@ -1,4 +1,0 @@
-[submodule "includes/libs/GitHubUpdater"]
-	path = includes/libs/GitHubUpdater
-	url = git@github.com:graybirchsolutions/WordPress-GitHub-Plugin-Updater.git
-	branch = versionTags
