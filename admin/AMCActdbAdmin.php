@@ -13,7 +13,7 @@
 
 namespace AMCActdb\BackEnd;
 
-use WP_GitHub_Updater;
+use WPGitHubUpdater;
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
@@ -72,7 +72,7 @@ class AMCActdbAdmin
                 'access_token' => '',
             );
     
-            new WP_GitHub_Updater( $config );    
+            new WPGitHubUpdater( $config );    
         }
     }
 }
