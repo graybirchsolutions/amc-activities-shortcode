@@ -17,6 +17,7 @@
 namespace AMCActdb;
 
 use AMCActdb\FrontEnd\AMCActdbPublic;
+use AMCActdb\BackEnd\AMCActdbAdmin;
 use AMCActdb\api\v1\Boot;
 
 class AMCActdbClass
@@ -86,6 +87,11 @@ class AMCActdbClass
     {
 
         /**
+         * Autoload Composer Dependencies
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'vendor/autoload.php';
+   
+        /**
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
@@ -96,11 +102,6 @@ class AMCActdbClass
          * Include all globally accessible functions.
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActdbGlobal.php';
-
-        /**
-         * Include Libs
-         */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/libs/autoload.php';
 
         /**
          * The modules responsible for defining the API Custom Endpoints.
@@ -142,6 +143,9 @@ class AMCActdbClass
      */
     private function defineAdminHooks()
     {
+        $plugin_admin = new AMCActdbAdmin($this->get_plugin_name(), $this->get_version());
+
+        $this->loader->add_action('init', $plugin_admin, 'github_updater_init');
     }
 
     /**

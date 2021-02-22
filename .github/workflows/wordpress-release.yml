@@ -15,13 +15,19 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - name: Install Dependencies
+        uses: php-actions/composer@v5
+        with:
+          php_version: 7.4
       - name: Build Project
         run: |
           mkdir build
       - name: Create Artifact
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -X -r build/amc-actdb-shortcode.zip . -x *.git* composer.* .* "*/\.*" build**
+          args: zip -X -r build/amc-actdb-shortcode.zip . -x *.git* composer.* .* "*/\.*" "vendor/*/*/test" "vendor/*/*/test/**" build**
       - name: Add Artifact to Release
         uses: JasonEtco/upload-to-release@master
         with:
