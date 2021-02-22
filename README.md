@@ -2,19 +2,21 @@
 
 [AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-actdb-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
 
-The AMC provides a simple API that returns a list of activities in XML format for the use of its member chapters. This plugin will format a query to that API and parse the returned list into valid HTML structure that is returned through the shortcode handler for display on the WordPress front end.
+The AMC provides a simple API for the use of its member chapters that returns a list of upcoming activities. A user can ask for events using specific chapter, committee and/or activity codes. For example, a user might request events from the Boston Chapter + Hiking Committee or the Boston Chapter + Hiking Activities.
+
+This plugin implements a WordPress `shortcode` that queries the API and displays the results on a page or a post as a list of upcoming events.
 
 ## Features
 
-The plugin creates a WordPress shortcode that can be used in any page, post or section that supports shortcodes. The shortcode format is
+The plugin implements a WordPress shortcode that can be used in any page, post or section that supports shortcodes. The shortcode format is
 
-    [amc_actdb chapter=id committee=id activity=id limit=n]
+    [amc_activities chapter=id committee=id activity=id limit=n]
 
-The chapter ID is mandatory. All other attributes are optional, but it is recommended to use other parameters (committee, activity or limit) to restrict the list as [amc_actdb chapter=xx] by itself will return **all** future activities from the database.
+The chapter ID is mandatory. All other attributes are optional, but it is recommended to use other parameters (committee, activity or limit) to restrict the list as `[amc_activities chapter=xx]` by itself will return **all** future chapter activities from the database.
 
 The ***limit*** attribute controls how many events are displayed. The events are returned in chronological order so using limit=5 would restrict the display to the next 5 upcoming events.
 
-Functionality to retrieve prior events is not available in the AMC API and cannot be added through this plugin.
+Functionality to retrieve prior events is not available through the AMC's API and cannot be added through this plugin.
 
 ## Requirements
 
@@ -23,50 +25,37 @@ Functionality to retrieve prior events is not available in the AMC API and canno
 
 ## Installation
 
-1. Download the zip archive of the plugin from the [GitHub GIT repository](https://github.com/graybirchsolutions/amc-actdb-shortcode/releases/latest) to your computer or web server.
-2. Upload or extract the `amc-actdb-shortcode` folder to your site’s `/wp-content/plugins/` directory. You can also use the *Add new* option found in the *Plugins* menu in WordPress.
-3. Activate the plugin from the *Plugins* menu in WordPress.
+You can find the latest release of the plugin at https://github.com/graybirchsolutions/amc-actdb-shortcode/releases/latest
 
-***Alternate Installation***
+1. Download the `amc-actdb-shortcode.zip` file from the release page to your computer. (*Do NOT download the source files zip*)
+2. Log in to your WordPress admin dashboard and navigate to Plugins page and click '**Add New**'
+3. From the Add Plugins page, click the '**Upload Plugin**' button at the top and select the zip file you downloaded in step 1.
+4. When the plugin is installed, go to the Plugins page and activate the plugin
 
-1. Login to your web server with your site's admin userid and navigate to your site's '/wp-content/plugins/' directory.
-2. Use **git** to pull the archive from the repository using the command 
-    ```
-    git clone https://github.com/graybirchsolutions/amc-actdb-shortcode.git
-    ```
-3. Logon to your WordPress installation and activate the plugin from the *Plugins* page.
+There is no admin or settings page. Basic usage instructions are provided in the plugin description on the Plugins page. Additional documentation can be found in the project Wiki at https://github.com/graybirchsolutions/amc-actdb-shortcode/wiki.
+
 
 ## Notes
 
-This version of the software renders events through the website **backend** when WordPress generates the page.
+For additional details - including a list of the Chapter, Committee and Activity codes - please see the project Wiki at https://github.com/graybirchsolutions/amc-actdb-shortcode/wiki.
 
-Page caching causes a copy the rendered page - including the rendered event list - to be stored in a cache database
-in order to speed up user access to the website pages. This cached file may contain outdated information until
-the cache is refreshed. This will typically manifest as the website not showing recently posted events until the cache
-files are regenerated.
-
-If you are using a caching plugin, we recommend setting the cache timeout between 4 and 24 hours to help keep the content current.
-
-In the next version of this plugin the software will add **frontend** rendering via AJAX queries from the user's browser.
-Using frontend queries will mean that the browser retrieves upcoming event data in realtime, which means the user should
-always see up-to-date event information.
+If you find a bug or are having difficulty getting the plugin working, please open an Issue (bug report) on the GitHub project page at https://github.com/graybirchsolutions/amc-actdb-shortcode/issues. (You may need to be logged in to GitHub to add a bug report).
 
 ## Affiliation
 
 The author(s) of this plugin are not affiliated with nor endorsed by the Appalachian Mountain Club (AMC). 
 
-The AMC maintains a read-only XML API to allow committees and chapters to access public data on events posted to the AMC Activities Database at https://activities.outdoors.org.
+The AMC maintains a read-only API to allow its committees and chapters to access public data on events posted to the AMC Activities Database at https://activities.outdoors.org.
 
-This plugin has been written to allow committee and chapter websites that use WordPress as their website software to easily present upcoming event information through the use of this software.
+This plugin has been written to allow committee and chapter websites that use WordPress as their website software to easily query the AMC's API and present upcoming event information on their website through the use of this software.
 
-The AMC adds the following disclaimer to it's API:
+The AMC adds the following disclaimer to its API:
 
 >The Appalachian Mountain Club has developed this service for web display of chapter trips by AMC Chapters only and expressly disclaims the use of this service for any other purpose. AMC will not be responsible for manipulation or misuse of data available via this service.
 
 ## License
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
