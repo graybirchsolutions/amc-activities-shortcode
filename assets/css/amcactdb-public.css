@@ -10,14 +10,8 @@
 
 .amc-events-container {
   margin: 25px auto;
+  max-width: 1100px;
 }
-
- .amc-events-container a:link {
- }
-
- .amc-events-container a:hover {
- }
-
 
 .amc-event-wrap {
   display: block;
@@ -27,6 +21,24 @@
   border-radius: 20px;
   box-shadow: -3px -3px 7px rgba(255, 255, 255, 0.7), 3px 3px 5px rgba(183, 180, 180, 0.5);
   position: relative;
+}
+
+.amc-loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  left: 50%;
+  top: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .amc-date-block {
@@ -62,11 +74,97 @@
   font-size: 16px;
   font-weight: normal;
   display: block;
-  vertical-align: baseline;
 }
 
 .amc-date-block span.year {
   display: none;
+}
+
+.amc-switch {
+  float: right;
+  clear: both;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.amc-switch {
+  display: inline-block;
+  width: 30px;
+  height: 15px;
+}
+
+.amc-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.amc-switch .tooltip {
+  visibility: hidden;
+  font-size: 10px;
+  z-index: 1;
+  position: absolute;
+  width: 140px;
+  background-color: lightgray;
+  /* color: white; */
+  padding: 0px 5px;
+  border-radius: 10px;
+  text-align: center;
+  top: 120%;
+  margin-left: -110px;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.amc-switch:hover .tooltip {
+  visibility: visible;
+}
+
+.amc-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.amc-slider:before {
+  position: absolute;
+  content: "";
+  height: 11px;
+  width: 11px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .amc-slider {
+  background-color: #2196F3;
+}
+
+input:focus + .amc-slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .amc-slider:before {
+  -webkit-transform: translateX(12px);
+  -ms-transform: translateX(12px);
+  transform: translateX(12px);
+}
+
+/* Rounded sliders */
+.amc-slider.round {
+  border-radius: 15px;
+}
+
+.amc-slider.round:before {
+  border-radius: 50%;
 }
 
 .amc-event-desc-block {
@@ -78,6 +176,23 @@
 
 .amc-event-desc-block span {
   display: block;
+}
+
+.amc-event-details {
+  /* Initial state */
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  /* Toggle button listener changes styles to to 
+     display: flex;
+     visibility: visible;
+     opacity: 1;
+  */
+  flex-wrap: wrap;
+  border-top: 20px;
+  margin-top: 20px;
+  -webkit-transition: opacity 600ms, visibility 600ms;
+  transition: opacity 600ms, visibility 600ms;
 }
 
 .amc-event-desc {
@@ -119,13 +234,57 @@
 .amc-event-type,
 .amc-event-leader,
 .amc-event-location,
-.amc-event-status {
+.amc-event-status,
+.amc-event-committee,
+.amc-event-long-desc {
   font-size: 13px;
   padding-right: 10px;
 }
 
 .amc-event-date {
   font-weight: bold;
+}
+
+.wrap-text {
+  white-space: -moz-pre-line;
+  white-space: -pre-line;
+  white-space: -o-pre-line;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+.amc-event-long-desc {
+  width: 70%;
+  height: auto;
+}
+
+.amc-event-long-desc p {
+  font-size: 14px;
+  line-height: 1.2em;
+}
+
+.amc-event-image {
+  align-self: start;
+  max-width: 200px;
+  width: 20%;
+  height: auto;
+  margin-right: 20px;
+}
+
+.amc-event-image img {
+  border-radius: 5px;
+  border-color: gray;
+  border-width: thick;
+  /* box-shadow: -3px -3px 7px rgba(255, 255, 255, 0.7), 3px 3px 5px rgba(183, 180, 180, 0.5); */
+}
+
+.amc-more-details {
+  width: 100%;
+  text-align: center;
+  color: #872203;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 
@@ -161,5 +320,12 @@
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f05a";
+  padding-right: 5px;
+}
+
+.amc-event-committee::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0c0";
   padding-right: 5px;
 }

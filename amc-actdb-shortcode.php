@@ -14,9 +14,9 @@
  *
  * @wordpress-plugin
  * Plugin Name:       AMC Activities Shortcode
- * Plugin URI:        https://bitbucket.org/graybirch/amc-actdb-shortcode
- * Description:       Include data from the AMC Acitivities Database via shortcode. Data is retrieved as XML using a simple HTTP query. Activities are re-formatted as HTTP blocks and displayed in the page or post as events. Usage: [amc_actdb chapter=id committee=id activity=id display=[short|long] limit=n]
- * Version:           1.0.0
+ * Plugin URI:        https://github.com/graybirchsolutions/amc-actdb-shortcode
+ * Description:       Display events from the AMC Activities Database via shortcode. Events are retrieved from the AMC Activities Database using a simple HTTP query. Activities are formatted and displayed in the page or post as events. <strong>Usage: [amc_activities chapter=id committee=id activity=id limit=n]</strong>. Chapter is the only required parameter, all other parameters are optional. Limit defaults to 10. For additional documentation - including Chapter, Committee and Activity IDs, please see the <a href="https://github.com/graybirchsolutions/amc-actdb-shortcode/wiki">AMC Activities Shortcode Project Wiki</a>.
+ * Version:           2.0.0
  * Author:            gray birch solutions
  * Author URI:        https://graybirch.solutions/
  * License:           GPL-2.0+
@@ -28,19 +28,25 @@ if (!defined('WPINC')) {
     die;
 }
 
+define('AMC_ACTDB_BASENAME', plugin_basename(__FILE__));
+define('AMC_ACTDB_ROOT', dirname(plugin_basename(__FILE__)));
+define('AMC_ACTDB_FILE', basename(plugin_basename(__FILE__)));
 define('AMC_ACTDB_DIR_URL', plugin_dir_url(__FILE__));
 define('AMC_ACTDB_DIR_PATH', plugin_dir_path(__FILE__));
-define('AMC_ACTDB_PUBLIC_DIR_URL', AMC_ACTDB_DIR_URL.'public/');
-define('AMC_ACTDB_VERSION', '1.0.0');
-define('AMC_ACTDB_ASSET_VERSION', '1.0.0');
+define('AMC_ACTDB_PUBLIC_DIR_URL', AMC_ACTDB_DIR_URL . 'public/');
+define('AMC_ACTDB_VERSION', '2.0.0');
+define('AMC_ACTDB_ASSET_VERSION', '2.0.0');
 
 define('AMC_ACTDB_BASE_URL', 'https://activities.outdoors.org/xml/index.cfm');
+define('AMC_ACTDB_BASE_EVENT_URL', 'https://activities.outdoors.org/search/index.cfm/action/details/id/');
+
+define('AMC_API_ROOT', 'AMCActdb/1.0');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path(__FILE__).'includes/AMCActdbClass.php';
+require plugin_dir_path(__FILE__) . 'includes/AMCActdbClass.php';
 
 /**
  * Begins execution of the plugin.
@@ -53,7 +59,7 @@ require plugin_dir_path(__FILE__).'includes/AMCActdbClass.php';
  */
 function amc_actdb_boot()
 {
-    $plugin = new \AMCActdb\Classes\AMCActdbClass();
+    $plugin = new \AMCActdb\AMCActdbClass();
     $plugin->run();
 }
 

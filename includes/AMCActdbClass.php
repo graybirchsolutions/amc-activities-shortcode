@@ -1,6 +1,5 @@
 <?php
 
-namespace AMCActdb\Classes;
 /**
  * The file that defines the core plugin class
  *
@@ -15,7 +14,11 @@ namespace AMCActdb\Classes;
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
 
+namespace AMCActdb;
+
 use AMCActdb\FrontEnd\AMCActdbPublic;
+use AMCActdb\BackEnd\AMCActdbAdmin;
+use AMCActdb\api\v1\Boot;
 
 class AMCActdbClass
 {
@@ -61,9 +64,9 @@ class AMCActdbClass
     {
         $this->plugin_name = 'amc-actdb-shortcode';
         $this->version = AMC_ACTDB_VERSION;
-        $this->load_dependencies();
-        $this->define_admin_hooks();
-        $this->define_public_hooks();
+        $this->loadDependencies();
+        $this->defineAdminHooks();
+        $this->definePublicHooks();
     }
 
     /**
@@ -80,14 +83,20 @@ class AMCActdbClass
      * @since    1.0.0
      * @access   private
      */
-    private function load_dependencies()
+    private function loadDependencies()
     {
 
+        /**
+         * Autoload Composer Dependencies
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'vendor/autoload.php';
+   
         /**
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActdbLoader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActdbOptionValues.php';
 
         /**
          * Include all globally accessible functions.
@@ -95,9 +104,15 @@ class AMCActdbClass
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActdbGlobal.php';
 
         /**
-         * Include Libs
+         * The modules responsible for defining the API Custom Endpoints.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/libs/autoload.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/interfaces/Route.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/responses/Response.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/responses/Error.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/routes/ReadOnly.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/routes/PublicReadRoute.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/routes/Activities.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/Boot.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
@@ -126,9 +141,11 @@ class AMCActdbClass
      * @since    1.0.0
      * @access   private
      */
-    private function define_admin_hooks()
+    private function defineAdminHooks()
     {
+        $plugin_admin = new AMCActdbAdmin($this->get_plugin_name(), $this->get_version());
 
+        $this->loader->add_action('init', $plugin_admin, 'github_updater_init');
     }
 
     /**
@@ -138,15 +155,15 @@ class AMCActdbClass
      * @since    1.0.0
      * @access   private
      */
-    private function define_public_hooks()
+    private function definePublicHooks()
     {
-
         $plugin_public = new AMCActdbPublic($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('init', $plugin_public, 'register_activities_render_functions');
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueueAMCActdbScript', 100);
 
+        $this->loader->add_action('rest_api_init', $plugin_public, 'registerAPIRoutes');
     }
 
     /**
@@ -193,10 +210,7 @@ class AMCActdbClass
         return $this->version;
     }
 
-
     public function addPluginDeactivationMessage()
     {
-
     }
-
 }
