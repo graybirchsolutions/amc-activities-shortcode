@@ -28,7 +28,9 @@ if (!defined('WPINC')) {
     die;
 }
 
-define('AMC_ACTDB_SLUG', plugin_basename(__FILE__));
+define('AMC_ACTDB_BASENAME', plugin_basename(__FILE__));
+define('AMC_ACTDB_ROOT', dirname(plugin_basename(__FILE__)));
+define('AMC_ACTDB_FILE', basename(plugin_basename(__FILE__)));
 define('AMC_ACTDB_DIR_URL', plugin_dir_url(__FILE__));
 define('AMC_ACTDB_DIR_PATH', plugin_dir_path(__FILE__));
 define('AMC_ACTDB_PUBLIC_DIR_URL', AMC_ACTDB_DIR_URL . 'public/');

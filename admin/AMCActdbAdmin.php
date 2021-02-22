@@ -59,8 +59,8 @@ class AMCActdbAdmin
 
             define( 'WP_GITHUB_FORCE_UPDATE', false );
             $config = array(
-                'slug' => AMC_ACTDB_SLUG,
-                'proper_folder_name' => 'amc-actdb-shortcode',
+                'slug' => AMC_ACTDB_BASENAME,
+                'proper_folder_name' => AMC_ACTDB_ROOT,
                 'api_url' => 'https://api.github.com/repos/graybirchsolutions/amc-actdb-shortcode',
                 'raw_url' => 'https://raw.githubusercontent.com/graybirchsolutions/amc-actdb-shortcode/master',
                 'github_url' => 'https://github.com/graybirchsolutions/amc-actdb-shortcode',
