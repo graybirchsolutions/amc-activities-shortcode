@@ -103,12 +103,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/graybirchsolutions/WordPress-GitHub-Plugin-Updater.git",
-                "reference": "287b663acff3a206863bf08286b52509ef5c2325"
+                "reference": "1a29126b17a56bceb2d7b72a0a91c5b4ec2c1ae9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/graybirchsolutions/WordPress-GitHub-Plugin-Updater/zipball/287b663acff3a206863bf08286b52509ef5c2325",
-                "reference": "287b663acff3a206863bf08286b52509ef5c2325",
+                "url": "https://api.github.com/repos/graybirchsolutions/WordPress-GitHub-Plugin-Updater/zipball/1a29126b17a56bceb2d7b72a0a91c5b4ec2c1ae9",
+                "reference": "1a29126b17a56bceb2d7b72a0a91c5b4ec2c1ae9",
                 "shasum": ""
             },
             "require": {
@@ -143,7 +143,7 @@
                 "issues": "https://github.com/radishconcepts/WordPress-GitHub-Plugin-Updater/issues",
                 "source": "https://github.com/graybirchsolutions/WordPress-GitHub-Plugin-Updater/tree/graybirch"
             },
-            "time": "2021-02-19T20:49:45+00:00"
+            "time": "2021-02-22T04:54:21+00:00"
         }
     ],
     "packages-dev": [],
