@@ -1,6 +1,6 @@
 # AMC Activities Shortcode WordPress Plugin
 
-[AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-actdb-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
+[AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-activities-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
 
 The AMC provides a simple API for the use of its member chapters that returns a list of upcoming activities. A user can ask for events using specific chapter, committee and/or activity codes. For example, a user might request events from the Boston Chapter + Hiking Committee or the Boston Chapter + Hiking Activities.
 
@@ -25,21 +25,21 @@ Functionality to retrieve prior events is not available through the AMC's API an
 
 ## Installation
 
-You can find the latest release of the plugin at https://github.com/graybirchsolutions/amc-actdb-shortcode/releases/latest
+You can find the latest release of the plugin at https://github.com/graybirchsolutions/amc-activities-shortcode/releases/latest
 
 1. Download the `amc-actdb-shortcode.zip` file from the release page to your computer. (*Do NOT download the source files zip*)
 2. Log in to your WordPress admin dashboard and navigate to Plugins page and click '**Add New**'
 3. From the Add Plugins page, click the '**Upload Plugin**' button at the top and select the zip file you downloaded in step 1.
 4. When the plugin is installed, go to the Plugins page and activate the plugin
 
-There is no admin or settings page. Basic usage instructions are provided in the plugin description on the Plugins page. Additional documentation can be found in the project Wiki at https://github.com/graybirchsolutions/amc-actdb-shortcode/wiki.
+There is no admin or settings page. Basic usage instructions are provided in the plugin description on the Plugins page. Additional documentation can be found in the project Wiki at https://github.com/graybirchsolutions/amc-activities-shortcode/wiki.
 
 
 ## Notes
 
-For additional details - including a list of the Chapter, Committee and Activity codes - please see the project Wiki at https://github.com/graybirchsolutions/amc-actdb-shortcode/wiki.
+For additional details - including a list of the Chapter, Committee and Activity codes - please see the project Wiki at https://github.com/graybirchsolutions/amc-activities-shortcode/wiki.
 
-If you find a bug or are having difficulty getting the plugin working, please open an Issue (bug report) on the GitHub project page at https://github.com/graybirchsolutions/amc-actdb-shortcode/issues. (You may need to be logged in to GitHub to add a bug report).
+If you find a bug or are having difficulty getting the plugin working, please open an Issue (bug report) on the GitHub project page at https://github.com/graybirchsolutions/amc-activities-shortcode/issues. (You may need to be logged in to GitHub to add a bug report).
 
 ## Affiliation
 
