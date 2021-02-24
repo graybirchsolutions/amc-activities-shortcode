@@ -6,12 +6,12 @@
  * @link       https://graybirch.solutions
  * @since      1.0.0
  *
- * @package    AMC_actdb_shortcode
- * @subpackage AMC_actdb_shortcode/admin
+ * @package    AMC_activities_shortcode
+ * @subpackage AMC_activities_shortcode/admin
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
 
-namespace AMCActdb\BackEnd;
+namespace AMCActivities\Admin;
 
 use WPGitHubUpdater;
 
@@ -20,7 +20,7 @@ if (!defined('WPINC')) {
     die;
 }
 
-class AMCActdbAdmin
+class AMCActivitiesAdmin
 {
 
     /**
@@ -59,12 +59,12 @@ class AMCActdbAdmin
 
             define( 'WP_GITHUB_FORCE_UPDATE', false );
             $config = array(
-                'slug' => AMC_ACTDB_BASENAME,
-                'proper_folder_name' => AMC_ACTDB_ROOT,
-                'api_url' => 'https://api.github.com/repos/graybirchsolutions/amc-actdb-shortcode',
-                'raw_url' => 'https://raw.githubusercontent.com/graybirchsolutions/amc-actdb-shortcode/master',
-                'github_url' => 'https://github.com/graybirchsolutions/amc-actdb-shortcode',
-                'zip_url' => 'https://github.com/graybirchsolutions/amc-actdb-shortcode/archive/master.zip',
+                'slug' => AMC_ACTIVITIES_BASENAME,
+                'proper_folder_name' => AMC_ACTIVITIES_ROOT,
+                'api_url' => 'https://api.github.com/repos/graybirchsolutions/amc-activities-shortcode',
+                'raw_url' => 'https://raw.githubusercontent.com/graybirchsolutions/amc-activities-shortcode/master',
+                'github_url' => 'https://github.com/graybirchsolutions/amc-activities-shortcode',
+                'zip_url' => 'https://github.com/graybirchsolutions/amc-activities-shortcode/archive/master.zip',
                 'sslverify' => true,
                 'requires' => '5.1',
                 'tested' => '5.6.1',

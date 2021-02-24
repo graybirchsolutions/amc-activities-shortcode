@@ -6,17 +6,17 @@
  * @link       https://graybirch.solutions
  * @since      1.1.0
  *
- * @package    AMC_actdb_shortcode
- * @subpackage AMC_actdb_shortcode/api
+ * @package    AMC_activities_shortcode
+ * @subpackage AMC_activities_shortcode/api
  * @author     Martin Jensen <marty@graybirch.solutions>
  *
  * @abstract
  **/
 
-namespace AMCActdb\api\v1\routes;
+namespace AMCActivities\api\v1\routes;
 
-use AMCActdb\api\v1\responses\Error;
-use AMCActdb\api\v1\responses\Response;
+use AMCActivities\api\v1\responses\Error;
+use AMCActivities\api\v1\responses\Response;
 use SimpleXMLElement;
 use WP_Error;
 
@@ -127,7 +127,7 @@ class Activities extends PublicReadRoute
 
     protected function fetchActivities(\WP_REST_Request $request)
     {
-        $amc_url = AMC_ACTDB_BASE_URL . '?';
+        $amc_url = AMC_ACTIVITIES_BASE_URL . '?';
 
         $amc_url = $amc_url .  'chapter=' . $request->get_param('chapter');
 
@@ -159,7 +159,7 @@ class Activities extends PublicReadRoute
         $eventResponse = [
             'trip_id' => (string)$event->trip_id,
             'trip_title' => (string)$event->trip_title,
-            'trip_url' => AMC_ACTDB_BASE_EVENT_URL . (string)$event->trip_id,
+            'trip_url' => AMC_ACTIVITIES_BASE_EVENT_URL . (string)$event->trip_id,
             'trip_committee' => (string)$event->committee,
             'trip_datetime' => (string)$event->trip_start_date,
             'trip_status' => (string)$event->status,

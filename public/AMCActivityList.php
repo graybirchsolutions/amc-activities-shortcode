@@ -6,12 +6,12 @@
  * @link       https://graybirch.solutions
  * @since      1.0.0
  *
- * @package    AMC_actdb_shortcode
- * @subpackage AMC_actdb_shortcode/public
+ * @package    AMC_activities_shortcode
+ * @subpackage AMC_activities_shortcode/public
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
 
-namespace AMCActdb\FrontEnd;
+namespace AMCActivities\FrontEnd;
 
 use SimpleXMLElement;
 
@@ -51,7 +51,7 @@ class AMCActivityList
      * 
      * @since 2.0
      */
-    public function render_placeholder($chapter, $committee, $activity, $limit, $display)
+    public function render_placeholder($chapter, $committee, $activity, $limit)
     {
         // Wrap the event list
         $this->html_string = "<div ";

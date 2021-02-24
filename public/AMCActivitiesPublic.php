@@ -9,16 +9,16 @@
  * @link       https://graybirch.solutions
  * @since      1.0.0
  *
- * @package    AMC_actdb_shortcode
- * @subpackage AMC_actdb_shortcode/public
+ * @package    AMC_activities_shortcode
+ * @subpackage AMC_activities_shortcode/public
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
 
-namespace AMCActdb\FrontEnd;
+namespace AMCActivities\FrontEnd;
 
-use AMCActdb\api\v1\Boot;
+use AMCActivities\api\v1\Boot;
 
-class AMCActdbPublic
+class AMCActivitiesPublic
 {
 
     /**
@@ -50,6 +50,7 @@ class AMCActdbPublic
     {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
+        do_action('qm/debug', 'Initializing AMCActivitiesPublic');
     }
 
     public function register_activities_render_functions()
@@ -60,8 +61,8 @@ class AMCActdbPublic
 
     public function registerAPIRoutes()
     {
-        $activities_route = new \AMCActdb\api\v1\routes\Activities();
-        $plugin_api = new \AMCActdb\api\v1\Boot(AMC_API_ROOT);
+        $activities_route = new \AMCActivities\api\v1\routes\Activities();
+        $plugin_api = new \AMCActivities\api\v1\Boot(AMC_API_ROOT);
 
         $plugin_api->addRoute($activities_route);
         $plugin_api->registerAllRoutes();
@@ -69,7 +70,7 @@ class AMCActdbPublic
 
     public function get_activities($chapter, $committee, $activity)
     {
-        $amc_url = AMC_ACTDB_BASE_URL . '?' . 'chapter=' . esc_attr($chapter);
+        $amc_url = AMC_ACTIVITIES_BASE_URL . '?' . 'chapter=' . esc_attr($chapter);
 
         if ($committee != '') {
             $amc_url = $amc_url . '&committee=' . esc_attr($committee);
@@ -94,27 +95,28 @@ class AMCActdbPublic
                 'chapter'         => '2',
                 'committee'     => '',
                 'activity'     => '',
-                'display'    => 'short',
                 'limit'      => '0'
             ),
             $atts,
-            'amc_actdb'
+            'amc_activities'
         ));
 
         $activities = new AMCActivityList($this->get_activities($chapter, $committee, $activity));
+        do_action('qm/debug', $activities);
+
 
         // 1.1.0 Shortcode now renders a placeholder in the DOM that will be filled in by Javascript in the browser
 
-        return $activities->render_placeholder(esc_attr($chapter), esc_attr($committee), esc_attr($activity), esc_attr($limit), esc_attr($display));
+        return $activities->render_placeholder(esc_attr($chapter), esc_attr($committee), esc_attr($activity), esc_attr($limit));
     }
 
-    public function enqueueAMCActdbScript()
+    public function enqueueAMCActivitiesScript()
     {
         global $post;
         if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'amc_activities') ) {
-            $styleSrc = AMC_ACTDB_DIR_URL . "assets/css/amcactdb-public.css";
+            $styleSrc = AMC_ACTIVITIES_DIR_URL . "assets/css/AMCActivitiesPublic.css";
             wp_enqueue_style(
-                'amcactdb-styles',
+                'amc-activities-styles',
                 $styleSrc,
                 array(),
                 $this->version,
@@ -124,18 +126,18 @@ class AMCActdbPublic
             // Add Font Awesome kit
             // <script src="https://kit.fontawesome.com/db96351575.js" crossorigin="anonymous"></script>
 
-            $styleSrc = AMC_ACTDB_DIR_URL . "vendor/components/font-awesome/css/solid.min.css";
+            $styleSrc = AMC_ACTIVITIES_DIR_URL . "vendor/components/font-awesome/css/solid.min.css";
             wp_enqueue_style(
-                'amc-actdb-font-awesome',
+                'amc-activities-awesome',
                 $styleSrc,
                 array(),
                 $this->version,
                 'all'
             );
 
-            $scriptSrc = AMC_ACTDB_DIR_URL . "assets/js/amcactdbRenderEvents.js";
+            $scriptSrc = AMC_ACTIVITIES_DIR_URL . "assets/js/amcActivitiesRenderEvents.js";
             wp_enqueue_script(
-                'amc-actdb-render-events',
+                'amc-activities-render-events',
                 $scriptSrc,
                 array(),
                 $this->version,

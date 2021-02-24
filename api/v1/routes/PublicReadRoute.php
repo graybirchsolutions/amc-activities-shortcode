@@ -6,14 +6,14 @@
  * @link       https://graybirch.solutions
  * @since      1.1.0
  *
- * @package    AMC_actdb_shortcode
- * @subpackage AMC_actdb_shortcode/api
+ * @package    AMC_activities_shortcode
+ * @subpackage AMC_activities_shortcode/api
  * @author     Martin Jensen <marty@graybirch.solutions>
  *
  * @abstract
  **/
 
-namespace AMCActdb\api\v1\routes;
+namespace AMCActivities\api\v1\routes;
 
 abstract class PublicReadRoute extends ReadOnly
 {

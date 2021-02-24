@@ -9,18 +9,18 @@
  * @link       https://graybirch.solutions
  * @since      1.0.0
  *
- * @package    AMC_actdb_shortcode
- * @subpackage AMC_actdb_shortcode/includes
+ * @package    AMC_activities_shortcode
+ * @subpackage AMC_activities_shortcode/includes
  * @author     Martin Jensen <marty@graybirch.solutions>
  */
 
-namespace AMCActdb;
+namespace AMCActivities;
 
-use AMCActdb\FrontEnd\AMCActdbPublic;
-use AMCActdb\BackEnd\AMCActdbAdmin;
-use AMCActdb\api\v1\Boot;
+use AMCActivities\FrontEnd\AMCActivitiesPublic;
+use AMCActivities\Admin\AMCActivitiesAdmin;
+use AMCActivities\api\v1\Boot;
 
-class AMCActdbClass
+class AMCActivitiesClass
 {
 
     /**
@@ -29,7 +29,7 @@ class AMCActdbClass
      *
      * @since    1.0.0
      * @access   protected
-     * @var      AMCActdbLoader $loader Maintains and registers all hooks for the plugin.
+     * @var      AMCActivitiesLoader $loader Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -62,8 +62,9 @@ class AMCActdbClass
      */
     public function __construct()
     {
-        $this->plugin_name = 'amc-actdb-shortcode';
-        $this->version = AMC_ACTDB_VERSION;
+        do_action('qm/debug', 'Initializing AMCActivitiesClass');
+        $this->plugin_name = 'amc-activities-shortcode';
+        $this->version = AMC_ACTIVITIES_VERSION;
         $this->loadDependencies();
         $this->defineAdminHooks();
         $this->definePublicHooks();
@@ -73,7 +74,7 @@ class AMCActdbClass
      * Load the required dependencies for this plugin.
      * Include the following files that make up the plugin:
      *
-     * - AMCActdbLoader. Orchestrates the hooks of the plugin.
+     * - AMCActivitiesLoader. Orchestrates the hooks of the plugin.
      * - Wp_table_data_press_Admin. Defines all hooks for the admin area.
      * - Wp_table_data_press_Public. Defines all hooks for the public side of the site.
      *
@@ -95,13 +96,13 @@ class AMCActdbClass
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActdbLoader.php';
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActdbOptionValues.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActivitiesLoader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActivitiesOptionValues.php';
 
         /**
          * Include all globally accessible functions.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActdbGlobal.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/AMCActivitiesGlobal.php';
 
         /**
          * The modules responsible for defining the API Custom Endpoints.
@@ -118,20 +119,20 @@ class AMCActdbClass
          * The class responsible for defining all actions that occur in the admin area.
          * Back-end functionality.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/AMCActdbAdmin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/AMCActivitiesAdmin.php';
 
         /**
          * The classes responsible for defining all actions that occur in the public-facing
          * side of the site. Front-end functionality.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/AMCActdbPublic.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/AMCActivitiesPublic.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'public/AMCActivityList.php';
 
         /*
          * Create the loader.
          */
 
-        $this->loader = new AMCActdbLoader();
+        $this->loader = new AMCActivitiesLoader();
     }
 
     /**
@@ -143,7 +144,7 @@ class AMCActdbClass
      */
     private function defineAdminHooks()
     {
-        $plugin_admin = new AMCActdbAdmin($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new AMCActivitiesAdmin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('init', $plugin_admin, 'github_updater_init');
     }
@@ -157,11 +158,11 @@ class AMCActdbClass
      */
     private function definePublicHooks()
     {
-        $plugin_public = new AMCActdbPublic($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new AMCActivitiesPublic($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('init', $plugin_public, 'register_activities_render_functions');
 
-        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueueAMCActdbScript', 100);
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueueAMCActivitiesScript', 100);
 
         $this->loader->add_action('rest_api_init', $plugin_public, 'registerAPIRoutes');
     }
@@ -192,7 +193,7 @@ class AMCActdbClass
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
-     * @return    AMCActdbLoader    Orchestrates the hooks of the plugin.
+     * @return    AMCActivitiesLoader    Orchestrates the hooks of the plugin.
      */
     public function get_loader()
     {
