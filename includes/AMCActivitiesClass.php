@@ -62,7 +62,6 @@ class AMCActivitiesClass
      */
     public function __construct()
     {
-        do_action('qm/debug', 'Initializing AMCActivitiesClass');
         $this->plugin_name = 'amc-activities-shortcode';
         $this->version = AMC_ACTIVITIES_VERSION;
         $this->loadDependencies();

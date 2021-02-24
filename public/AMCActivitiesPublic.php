@@ -50,7 +50,6 @@ class AMCActivitiesPublic
     {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
-        do_action('qm/debug', 'Initializing AMCActivitiesPublic');
     }
 
     public function register_activities_render_functions()
@@ -102,10 +101,8 @@ class AMCActivitiesPublic
         ));
 
         $activities = new AMCActivityList($this->get_activities($chapter, $committee, $activity));
-        do_action('qm/debug', $activities);
 
-
-        // 1.1.0 Shortcode now renders a placeholder in the DOM that will be filled in by Javascript in the browser
+        // 2.0.0 Shortcode now renders a placeholder in the DOM that will be filled in by Javascript in the browser
 
         return $activities->render_placeholder(esc_attr($chapter), esc_attr($committee), esc_attr($activity), esc_attr($limit));
     }
