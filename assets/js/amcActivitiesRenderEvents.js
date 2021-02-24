@@ -1,19 +1,19 @@
 /**
  * @fileoverview JavaScript utility to query the AMC ActDB API and render a list of events
- * in the DOM. Provided as part of the Wordpress plugin amc-actdb-shortcode
+ * in the DOM. Provided as part of the Wordpress plugin amc-activities-shortcode
  * 
  * @author marty@graybirch.solutions (Martin Jensen)
  * 
- * @link              https://github.com/graybirchsolutions/amc-actdb-shortcode
+ * @link              https://github.com/graybirchsolutions/amc-activities-shortcode
  * @since             1.1.0
  *
- * @package           amc-actdb-shortcode
+ * @package           amc-activities-shortcode
  *
  * @wordpress-plugin
  * Plugin Name:       AMC Activities Shortcode
- * Plugin URI:        https://github.com/graybirchsolutions/amc-actdb-shortcode
- * Description:       Display events from the AMC Activities Database via shortcode. Data is retrieved from the Activities Database XML API via a simple HTTP query. Activities are re-formatted as HTML blocks and displayed in the page or post as events. <strong>Usage: [amc_actdb chapter=id committee=id activity=id display=[short|long] limit=n]</strong>. Chapter is the only required parameter, all other parameters are optional. Display defaults to short. Limit defaults to 10.
- * Version:           1.1.0
+ * Plugin URI:        https://github.com/graybirchsolutions/amc-activities-shortcode
+ * Description:       Display events from the AMC Activities Database via shortcode. Data is retrieved from the Activities Database XML API via a simple HTTP query. Activities are re-formatted as HTML blocks and displayed in the page or post as events. <strong>Usage: [amc_activities chapter=id committee=id activity=id display=[short|long] limit=n]</strong>. Chapter is the only required parameter, all other parameters are optional. Display defaults to short. Limit defaults to 10.
+ * Version:           2.0.0
  * Author:            gray birch solutions
  * Author Email:      marty@graybirch.solutions
  * Author URI:        https://graybirch.solutions/
@@ -21,12 +21,12 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-const AMCACTDB_API_ACTIVITIES_BASE = '/wp-json/AMCActdb/1.0/activities'
+const AMCACTDB_API_ACTIVITIES_BASE = '/wp-json/AMCActivities/1.0/activities'
 
-var myscript = document.getElementById("amc-actdb-render-events-js");
+var myscript = document.getElementById("amc-activities-render-events-js");
 var myscripturl = myscript.src;
 
-const AMC_ACTDB_ASSETDIR_URL = myscripturl.slice(0, myscripturl.indexOf('/js/'));
+const AMC_ACTIVITIES_ASSETDIR_URL = myscripturl.slice(0, myscripturl.indexOf('/js/'));
 
 var renderEvent = function (activity) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -263,7 +263,7 @@ var renderEvent = function (activity) {
         img.src = `https:${activity.trip_images[0]}`;
     } else {
         // Fetch a random seeded image from our own assets
-        img.src = `${AMC_ACTDB_ASSETDIR_URL}/img/AMC_Logo_${Math.floor(Math.random() * 10) + 1}.svg`;
+        img.src = `${AMC_ACTIVITIES_ASSETDIR_URL}/img/AMC_Logo_${Math.floor(Math.random() * 10) + 1}.svg`;
         img.width = '200';
         img.height = '200';
     }
@@ -348,14 +348,10 @@ var renderBadQuery = function (eventBlock) {
 }
 
 var renderEvents = function (eventBlock, activities) {
-    loader = eventBlock.querySelector(".amc-loader");
-
     for (var i = 0; i < activities.length; i++) {
         var activity = activities[i];
         eventBlock.appendChild(renderEvent(activity));
     }
-
-    loader.remove();
 }
 
 function renderAMCEvents () {
@@ -395,12 +391,13 @@ async function renderBlock(eventBlock, queryURL) {
             
     let response = await fetch(queryURL);
 
+    loader = eventBlock.querySelector(".amc-loader");
     if (!response.ok || response.status == '204') {
         if (response.status == '204') {
             renderNoEvents(eventBlock);
         } else if (response.status == '400') {
             console.log('Bad request: Error 400 - Likely due to missing chapter in the server request to AMC Activities Database');
-            console.log('             Make sure the amc-actdb-shortcode has included a valid chapter number.');
+            console.log('             Make sure the amc-activities-shortcode has included a valid chapter number.');
             renderBadQuery(eventBlock);
         } else if (response.status == '404') {
             console.log('Error 404 - Page or API Route not found on server.');
@@ -417,6 +414,7 @@ async function renderBlock(eventBlock, queryURL) {
 
         renderEvents(eventBlock, activities);
     }
+    loader.remove();
 }
 
 
