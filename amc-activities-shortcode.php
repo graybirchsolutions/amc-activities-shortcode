@@ -16,7 +16,7 @@
  * Plugin Name:       AMC Activities Shortcode
  * Plugin URI:        https://github.com/graybirchsolutions/amc-activities-shortcode
  * Description:       Display events from the AMC Activities Database via shortcode. Events are retrieved from the AMC Activities Database using a simple HTTP query. Activities are formatted and displayed in the page or post as events. <strong>Usage: [amc_activities chapter=id committee=id activity=id limit=n]</strong>. Chapter is the only required parameter, all other parameters are optional. Limit defaults to 10. For additional documentation - including Chapter, Committee and Activity IDs, please see the <a href="https://github.com/graybirchsolutions/amc-activities-shortcode/wiki">AMC Activities Shortcode Project Wiki</a>.
- * Version:           2.0.1
+ * Version:           2.0.2
  * Author:            gray birch solutions
  * Author URI:        https://graybirch.solutions/
  * License:           GPL-2.0+
@@ -34,8 +34,8 @@ define('AMC_ACTIVITIES_FILE', basename(plugin_basename(__FILE__)));
 define('AMC_ACTIVITIES_DIR_URL', plugin_dir_url(__FILE__));
 define('AMC_ACTIVITIES_DIR_PATH', plugin_dir_path(__FILE__));
 define('AMC_ACTIVITIES_PUBLIC_DIR_URL', AMC_ACTIVITIES_DIR_URL . 'public/');
-define('AMC_ACTIVITIES_VERSION', '2.0.1');
-define('AMC_ACTIVITIES_ASSET_VERSION', '2.0.1');
+define('AMC_ACTIVITIES_VERSION', '2.0.2');
+define('AMC_ACTIVITIES_ASSET_VERSION', '2.0.2');
 
 define('AMC_ACTIVITIES_BASE_URL', 'https://activities.outdoors.org/xml/index.cfm');
 define('AMC_ACTIVITIES_BASE_EVENT_URL', 'https://activities.outdoors.org/search/index.cfm/action/details/id/');

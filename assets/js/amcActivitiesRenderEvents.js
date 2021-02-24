@@ -13,7 +13,7 @@
  * Plugin Name:       AMC Activities Shortcode
  * Plugin URI:        https://github.com/graybirchsolutions/amc-activities-shortcode
  * Description:       Display events from the AMC Activities Database via shortcode. Data is retrieved from the Activities Database XML API via a simple HTTP query. Activities are re-formatted as HTML blocks and displayed in the page or post as events. <strong>Usage: [amc_activities chapter=id committee=id activity=id display=[short|long] limit=n]</strong>. Chapter is the only required parameter, all other parameters are optional. Display defaults to short. Limit defaults to 10.
- * Version:           2.0.1
+ * Version:           2.0.2
  * Author:            gray birch solutions
  * Author Email:      marty@graybirch.solutions
  * Author URI:        https://graybirch.solutions/
