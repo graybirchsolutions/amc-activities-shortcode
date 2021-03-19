@@ -35,7 +35,7 @@ const renderEvent = function (activity) {
   const dt = activity.trip_datetime.split(' ')
   const darr = dt[0].split('-')
   const tarr = dt[1].split(':')
-  const sDate = new Date(darr[0], darr[1], darr[2], tarr[0], tarr[1])
+  const sDate = new Date(darr[0], darr[1] - 1, darr[2], tarr[0], tarr[1])
 
   let min = sDate.getMinutes()
   if (min < 10) {
