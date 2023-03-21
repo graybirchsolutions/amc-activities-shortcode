@@ -29,7 +29,8 @@ Additional documentation - including a list of valid codes - can be found on our
 
 You can find the latest release of the plugin at https://github.com/graybirchsolutions/amc-activities-shortcode/releases/latest
 
-1. Download the `amc-activities-shortcode.zip` file from the release page to your computer. (*Do NOT download the source files zip*)
+1. Download the `amc-activities-shortcode.zip` file from the release page to your computer. (*DO NOT try to 
+   install from the `Source Code (zip)` or the `Source Code (tar.gz)` links directly into WordPress*)
 2. Log in to your WordPress admin dashboard and navigate to Plugins page and click '**Add New**'
 3. From the Add Plugins page, click the '**Upload Plugin**' button at the top and select the zip file you downloaded in step 1.
 4. When the plugin is installed, go to the Plugins page and activate the plugin
