@@ -12,8 +12,7 @@ Please note we have a code of conduct, please follow it in all your interactions
 2. Test your changes against the *latest version* of WordPress to insure compatibility.
 3. If possible, test your changes with the *minimum versions* of PHP, MySQL, and MariaDB supported by the 
    latest version of WordPress.
-4. **Before pushing your changes, please open a new  
-   [issue](https://github.com/graybirchsolutions/amc-activities-shortcode/issues) to track your changes.**
+4. **Before pushing your changes, please open a new [issue](https://github.com/graybirchsolutions/amc-activities-shortcode/issues) to track your changes.**
 5. Update the CHANGELOG.md with details of changes to the software, *including a reference to the issue number*.
    this includes new environment variables, exposed ports, useful file locations and container parameters.
 6. Increase the version numbers in any examples files and the CHANGELOG.md to the new version that this

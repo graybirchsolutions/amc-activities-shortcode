@@ -262,7 +262,8 @@ const renderEvent = function (activity) {
   const img = document.createElement('img')
   if (activity.trip_images.length > 0) {
     img.src = `https:${activity.trip_images[0]}`
-    img.maxwidth = '200'
+    img.style.maxWidth = '200px';
+    img.style.maxHeight = '200px';
   } else {
     // Fetch a random seeded image from our own assets
     img.src = `${AMC_ACTIVITIES_ASSETDIR_URL}/img/AMC_Logo_${Math.floor(Math.random() * 10) + 1}.svg`
