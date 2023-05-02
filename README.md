@@ -18,6 +18,8 @@ The ***limit*** attribute controls how many events are displayed. The events are
 
 Functionality to retrieve prior events is not available through the AMC's API and cannot be added through this plugin.
 
+Additional documentation - including a list of valid codes - can be found on our Wiki page at https://github.com/graybirchsolutions/amc-activities-shortcode/wiki
+
 ## Requirements
 
 * PHP >= 7.1
