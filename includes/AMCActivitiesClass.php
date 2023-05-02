@@ -109,7 +109,7 @@ class AMCActivitiesClass
         require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/interfaces/Route.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/responses/Response.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/responses/Error.php';
-        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/routes/ReadOnly.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/routes/ReadOnlyRoute.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/routes/PublicReadRoute.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/routes/Activities.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'api/v1/Boot.php';

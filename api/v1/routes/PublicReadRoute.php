@@ -15,7 +15,7 @@
 
 namespace AMCActivities\api\v1\routes;
 
-abstract class PublicReadRoute extends ReadOnly
+abstract class PublicReadRoute extends ReadOnlyRoute
 {
     public function getItemsPermissionsCheck(\WP_REST_Request $request)
     {
