@@ -42,6 +42,18 @@ define('AMC_ACTIVITIES_BASE_EVENT_URL', 'https://activities.outdoors.org/search/
 
 define('AMC_API_ROOT', 'AMCActivities/1.0');
 
+register_activation_hook(__FILE__, 'plugin_activation_checks' );
+
+function check_allow_url_fopen() {
+    if ( ! ini_get( 'allow_url_fopen' ) ) {
+        wp_die( 'The allow_url_fopen setting is not enabled.' );
+    }
+}
+
+function plugin_activation_checks() {
+    check_allow_url_fopen();
+}
+
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
