@@ -22,8 +22,9 @@ Additional documentation - including a list of valid codes - can be found on our
 
 ## Requirements
 
-* PHP >= 7.1
+* PHP >= 7.1 (8.0 preferred)
 * WordPress >= 5.2
+* The option flag `allow_url_fopen` must be set to `On` in your site's PHP settings. (Not all hosting providers have this option turned on by default)
 
 ## Installation
 
