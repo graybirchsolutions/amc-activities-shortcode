@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The plugin bootstrap file
  *
@@ -47,6 +48,69 @@ define('AMC_API_ROOT', 'AMCActivities/1.0');
  * admin-specific hooks, and public-facing site hooks.
  */
 require plugin_dir_path(__FILE__) . 'includes/AMCActivitiesClass.php';
+
+/**
+ * Activation Hook & Notices
+ */
+register_activation_hook(__FILE__, 'on_activation');
+
+/**
+ * The activation hook.
+ * 
+ * @since 2.0.3
+ * Checks for allow_url_fopen in php settings. Sets transient to trigger
+ * an admin notice later.
+ * 
+ * Note: Don't try to deactivate the plugin in the hook. Appears that 
+ * the hook fires before the plugin is actually activated in WP.
+ */
+function on_activation()
+{
+    if (ini_get("allow_url_fopen") == "1") {
+        set_transient('amc-activation-success', true, 5);
+    } else {
+        set_transient('amc-activation-error', true, 5);
+    }
+}
+
+/**
+ * Admin notices. Triggered via transient from activation hook.
+ * @since 2.0.3
+ */
+add_action('admin_notices', 'activation_error_msg');
+add_action('admin_notices', 'activation_success_msg');
+
+function activation_error_msg()
+{
+    if (get_transient('amc-activation-error')) {
+        ?>
+        <div class="notice notice-error is-dismissible">
+            <p>
+                Error! The AMC Activities Shortcode plugin requires the option <b>allow_url_fopen</b> to be turned <b>On</b> in your host's php.ini settings.
+                The plugin has been deactivated.
+            </p>
+            <p>Please contact your server admin or hosting provider if you are not certain how to modify your site php.ini settings.</p>
+        </div>
+        <?php
+        // Might be a better place to deactivate the plugin on activation error, but this seems to work consistently and avoids more hooks.
+        include_once ABSPATH . '/wp-admin/includes/plugin.php';
+        deactivate_plugins(plugin_basename(__FILE__));
+    }
+}
+
+function activation_success_msg()
+{
+    if (get_transient('amc-activation-success')) {
+    ?>
+        <div class="notice notice-success is-dismissible">
+            <p>
+                The AMC Activities Shortcode plugin is ready for action. Please visit the 
+                <a href="https://github.com/graybirchsolutions/amc-activities-shortcode/wiki">Project Wiki</a> if you need help getting started.
+            </p>
+        </div>
+<?php
+    }
+}
 
 /**
  * Begins execution of the plugin.
