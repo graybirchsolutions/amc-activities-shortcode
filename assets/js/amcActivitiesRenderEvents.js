@@ -262,8 +262,8 @@ const renderEvent = function (activity) {
   const img = document.createElement('img')
   if (activity.trip_images.length > 0) {
     img.src = `https:${activity.trip_images[0]}`
-    img.style.maxWidth = '200px';
-    img.style.maxHeight = '200px';
+    img.style.maxWidth = '200px'
+    img.style.maxHeight = '200px'
   } else {
     // Fetch a random seeded image from our own assets
     img.src = `${AMC_ACTIVITIES_ASSETDIR_URL}/img/AMC_Logo_${Math.floor(Math.random() * 10) + 1}.svg`
@@ -399,11 +399,13 @@ async function renderBlock (eventBlock, queryURL) {
     if (response.status === 204) {
       renderNoEvents(eventBlock)
     } else if (response.status === 400) {
-      console.log('Bad request: Error 400 - Likely due to missing chapter in the server request to AMC Activities Database')
+      console.log(
+        'AMCActivities: Error 400 - Likely due to missing chapter in the server request to AMC Activities Database'
+      )
       console.log('             Make sure the amc-activities-shortcode has included a valid chapter number.')
       renderBadQuery(eventBlock)
     } else if (response.status === 404) {
-      console.log('Error 404 - Page or API Route not found on server.')
+      console.log('AMCActivities: Error 404 - API Route not found on server.')
       renderBadQuery(eventBlock)
     } else {
       throw new Error('Unknown Response: Error ' + response.status + ' - ' + response.statusText)
