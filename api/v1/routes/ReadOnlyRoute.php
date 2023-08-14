@@ -19,7 +19,7 @@ use AMCActivities\api\v1\interfaces\Route;
 use AMCActivities\api\v1\responses\Error;
 use AMCActivities\api\v1\responses\Response;
 
-abstract class ReadOnly implements Route
+abstract class ReadOnlyRoute implements Route
 {
     /**
      * @inheritdoc

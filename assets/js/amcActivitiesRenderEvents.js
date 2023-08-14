@@ -223,7 +223,8 @@ const renderEvent = function (activity) {
     const evwrap = this.closest('.amc-event-wrap')
     const evdetails = evwrap.querySelector('.amc-event-details')
     if (this.checked) {
-      evdetails.style.display = 'flex'
+      // evdetails.style.display = 'flex'
+      evdetails.style.display = 'block'
       evdetails.style.visibility = 'visible'
       evdetails.style.opacity = '1'
     } else {
@@ -259,27 +260,26 @@ const renderEvent = function (activity) {
   const details = document.createElement('div')
   details.className = 'amc-event-details'
 
+  const description = document.createElement('div')
+  description.className = 'amc-event-long-desc'
+
   const img = document.createElement('img')
-  if (!activity.trip_images.length === 0) {
+  if (activity.trip_images.length > 0) {
     img.src = `https:${activity.trip_images[0]}`
   } else {
     // Fetch a random seeded image from our own assets
     img.src = `${AMC_ACTIVITIES_ASSETDIR_URL}/img/AMC_Logo_${Math.floor(Math.random() * 10) + 1}.svg`
-    img.width = '200'
-    img.height = '200'
   }
 
   const imgdiv = document.createElement('div')
   imgdiv.className = 'amc-event-image'
   imgdiv.appendChild(img)
-
-  const fulldiv = document.createElement('div')
-  fulldiv.className = 'amc-event-long-desc'
+  description.appendChild(imgdiv)
 
   const fulltxt = document.createElement('p')
   fulltxt.className = 'wrap-text'
   fulltxt.textContent = activity.trip_description
-  fulldiv.appendChild(fulltxt)
+  description.appendChild(fulltxt)
 
   const evmore = document.createElement('div')
   evmore.className = 'amc-more-details'
@@ -298,8 +298,7 @@ const renderEvent = function (activity) {
   evmore.appendChild(morx2)
   evmore.appendChild(mora2)
 
-  details.appendChild(imgdiv)
-  details.appendChild(fulldiv)
+  details.appendChild(description)
   details.appendChild(evmore)
 
   edb.appendChild(details)
@@ -397,11 +396,13 @@ async function renderBlock (eventBlock, queryURL) {
     if (response.status === 204) {
       renderNoEvents(eventBlock)
     } else if (response.status === 400) {
-      console.log('Bad request: Error 400 - Likely due to missing chapter in the server request to AMC Activities Database')
+      console.log(
+        'AMCActivities: Error 400 - Likely due to missing chapter in the server request to AMC Activities Database'
+      )
       console.log('             Make sure the amc-activities-shortcode has included a valid chapter number.')
       renderBadQuery(eventBlock)
     } else if (response.status === 404) {
-      console.log('Error 404 - Page or API Route not found on server.')
+      console.log('AMCActivities: Error 404 - API Route not found on server.')
       renderBadQuery(eventBlock)
     } else {
       throw new Error('Unknown Response: Error ' + response.status + ' - ' + response.statusText)
