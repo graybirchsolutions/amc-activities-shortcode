@@ -68,3 +68,4 @@ Please see [http://www.gnu.org/licenses/gpl-3.0.html](http://www.gnu.org/license
 ## Contributors
 
 - Martin Jensen (marty@graybirch.solutions)
+- Chaoran Xie (chaoranxie@gmail.com)
