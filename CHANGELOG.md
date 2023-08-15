@@ -11,7 +11,10 @@ This plugin HAS NOT been submitted to the WordPress repository. It is available 
 ## Changes
 The following changes have been applied through the release history of this plugin.
 
+### v2.0.4
+
 ### v2.0.3
+* Improve expanded event display on mobile
 * Fix an issue that prevented display of custom image in expanded event block (#18)
 * Make sure that the host has the proper PHP settings on activation (#17)
 * Fix an issue that prevented the plugin from activating under PHP 8.1 or higher (#16)
