@@ -2,6 +2,23 @@
 
 [AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-activities-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
 
+# Plugin No Longer Functions
+
+In March of 2025 the AMC migrated from their home-grown Activities Database (ACTDB) to a new SalesForce-based app, the Outdoor Connector (OC).
+
+This plugin relied on an API in ACTDB to allow users to pull public information from the database using XML queries. The OC does not, at this writing, publish an API for use on Chapter or Committee websites.
+
+Until such time as the AMC enables API access to the OC, this plugin will be collecting dust. The plugin itself will cause errors in site rendering as the XML feed to ACTDB is no longer available. If API access to the OC is enabled, it is my intent to update this plugin to use the new API backend.
+
+If you liked the functionality in this plugin, you should lobby your local Chapter to push API access to the OC. 
+
+Thanks for your support
+
+Marty Jensen
+March 2025
+
+## Description
+
 The AMC provides a simple API for the use of its member chapters that returns a list of upcoming activities. A user can ask for events using specific chapter, committee and/or activity codes. For example, a user might request events from the Boston Chapter + Hiking Committee or the Boston Chapter + Hiking Activities.
 
 This plugin implements a WordPress `shortcode` that queries the API and displays the results on a page or a post as a list of upcoming events.
