@@ -2,7 +2,7 @@
 
 [AMC Activities Shortcode](https://github.com/graybirchsolutions/amc-activities-shortcode) is a WordPress plugin to display selected trips/activities from the Appalachian Mountain Club (AMC) [Activities Database](https://activities.outdoors.org/) on your own website.
 
-# Plugin No Longer Functions
+# *** Plugin No Longer Functions ***
 
 In March of 2025 the AMC migrated from their home-grown Activities Database (ACTDB) to a new SalesForce-based app, the Outdoor Connector (OC).
 
